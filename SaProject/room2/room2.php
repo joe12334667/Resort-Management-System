@@ -13,135 +13,141 @@
         <link href="assets/css/main.css" rel="stylesheet"/>
         <link href="../images/logo.jpg"  rel="icon">
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Noto+Sans+TC:100,300" rel="stylesheet">
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
-    <?php
-    $go = true;
-    $errMas = "";
-    if (isset($_POST["send"])) {
-        $a = isset($_POST["a"]) || isset($_POST["b"]) || isset($_POST["c"]) || isset($_POST["d"]) || isset($_POST["e"]) || isset($_POST["f"]) || isset($_POST["g"]) || isset($_POST["h"]) || isset($_POST["i"]) || isset($_POST["j"]);
-        if (!$a) {
-            echo "<script>alert('請訂購一間房以上')</script>";
-            $go = false;
-        }
 
-        if (isset($_POST["a"])) {
-            if ($_POST["a_house"] != "" && $_POST["a_bed"] != "") {
-                $_SESSION["a"] = $_POST["a"];
-                $_SESSION["a_house"] = $_POST["a_house"];
-                $_SESSION["a_bed"] = $_POST["a_bed"];
-                $go = true;
-            } else {
-                $errMas .= "甜蜜雙人房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["b"])) {
-            if ($_POST["b_house"] != "" && $_POST["b_bed"] != "") {
-                $_SESSION["b"] = $_POST["b"];
-                $_SESSION["b_house"] = $_POST["b_house"];
-                $_SESSION["b_bed"] = $_POST["b_bed"];
-                $go = true;
-            } else {
-                $errMas .= "豪華雙人房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["c"])) {
-            if ($_POST["c_house"] != "" && $_POST["c_bed"] != "") {
-                $_SESSION["c"] = $_POST["c"];
-                $_SESSION["c_house"] = $_POST["c_house"];
-                $_SESSION["c_bed"] = $_POST["c_bed"];
-                $go = true;
-            } else {
-                $errMas .= "四人家庭房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["d"])) {
-            if ($_POST["d_house"] != "" && $_POST["d_bed"] != "") {
-                $_SESSION["d"] = $_POST["d"];
-                $_SESSION["d_house"] = $_POST["d_house"];
-                $_SESSION["d_bed"] = $_POST["d_bed"];
-                $go = true;
-            } else {
-                $errMas .= "娛樂四人房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["e"])) {
-            if ($_POST["e_house"] != "" && $_POST["e_bed"] != "") {
-                $_SESSION["e"] = $_POST["e"];
-                $_SESSION["e_house"] = $_POST["e_house"];
-                $_SESSION["e_bed"] = $_POST["e_bed"];
-                $go = true;
-            } else {
-                $errMas .= "海景欣賞房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["f"])) {
-            if ($_POST["f_house"] != "" && $_POST["f_bed"] != "") {
-                $_SESSION["f"] = $_POST["f"];
-                $_SESSION["f_house"] = $_POST["f_house"];
-                $_SESSION["f_bed"] = $_POST["f_bed"];
-                $go = true;
-            } else {
-                $errMas .= "經典大套房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["g"])) {
-            if ($_POST["g_house"] != "" && $_POST["g_bed"] != "") {
-                $_SESSION["g"] = $_POST["g"];
-                $_SESSION["g_house"] = $_POST["g_house"];
-                $_SESSION["g_bed"] = $_POST["g_bed"];
-                $go = true;
-            } else {
-                $errMas .= "溫馨親子套房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["h"])) {
-            if ($_POST["h_house"] != "" && $_POST["h_bed"] != "") {
-                $_SESSION["h"] = $_POST["h"];
-                $_SESSION["h_house"] = $_POST["h_house"];
-                $_SESSION["h_bed"] = $_POST["h_bed"];
-                $go = true;
-            } else {
-                $errMas .= "和洋式套房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["i"])) {
-            if ($_POST["i_house"] != "" && $_POST["i_bed"] != "") {
-                $_SESSION["i"] = $_POST["i"];
-                $_SESSION["i_house"] = $_POST["i_house"];
-                $_SESSION["i_bed"] = $_POST["i_bed"];
-                $go = true;
-            } else {
-                $errMas .= "主題套房  ";
-                $go = false;
-            }
-        }
-        if (isset($_POST["j"])) {
-            if ($_POST["j_house"] != "" && $_POST["j_bed"] != "") {
-                $_SESSION["j"] = $_POST["j"];
-                $_SESSION["j_house"] = $_POST["j_house"];
-                $_SESSION["j_bed"] = $_POST["j_bed"];
-                $go = true;
-            } else {
-                $errMas .= "樓中樓套房  ";
-                $go = false;
-            }
-        }
-
-        if ($go) {
-            header('Location: ../php/roomData.php');
-        }
-    }
-    ?>
     <body>
+        <?php
+        $go = true;
+        $errMas = "";
+        if (isset($_POST["send"])) {
+            $a = isset($_POST["a"]) || isset($_POST["b"]) || isset($_POST["c"]) || isset($_POST["d"]) || isset($_POST["e"]) || isset($_POST["f"]) || isset($_POST["g"]) || isset($_POST["h"]) || isset($_POST["i"]) || isset($_POST["j"]);
+            if (!$a) {
+                echo '<script>  swal({
+                text: "請至少訂一間房!",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+                $go = false;
+            }
 
+            if (isset($_POST["a"])) {
+                if ($_POST["a_house"] != "" && $_POST["a_bed"] != "") {
+                    $_SESSION["a"] = $_POST["a"];
+                    $_SESSION["a_house"] = $_POST["a_house"];
+                    $_SESSION["a_bed"] = $_POST["a_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "甜蜜雙人房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["b"])) {
+                if ($_POST["b_house"] != "" && $_POST["b_bed"] != "") {
+                    $_SESSION["b"] = $_POST["b"];
+                    $_SESSION["b_house"] = $_POST["b_house"];
+                    $_SESSION["b_bed"] = $_POST["b_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "豪華雙人房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["c"])) {
+                if ($_POST["c_house"] != "" && $_POST["c_bed"] != "") {
+                    $_SESSION["c"] = $_POST["c"];
+                    $_SESSION["c_house"] = $_POST["c_house"];
+                    $_SESSION["c_bed"] = $_POST["c_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "四人家庭房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["d"])) {
+                if ($_POST["d_house"] != "" && $_POST["d_bed"] != "") {
+                    $_SESSION["d"] = $_POST["d"];
+                    $_SESSION["d_house"] = $_POST["d_house"];
+                    $_SESSION["d_bed"] = $_POST["d_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "娛樂四人房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["e"])) {
+                if ($_POST["e_house"] != "" && $_POST["e_bed"] != "") {
+                    $_SESSION["e"] = $_POST["e"];
+                    $_SESSION["e_house"] = $_POST["e_house"];
+                    $_SESSION["e_bed"] = $_POST["e_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "海景欣賞房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["f"])) {
+                if ($_POST["f_house"] != "" && $_POST["f_bed"] != "") {
+                    $_SESSION["f"] = $_POST["f"];
+                    $_SESSION["f_house"] = $_POST["f_house"];
+                    $_SESSION["f_bed"] = $_POST["f_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "經典大套房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["g"])) {
+                if ($_POST["g_house"] != "" && $_POST["g_bed"] != "") {
+                    $_SESSION["g"] = $_POST["g"];
+                    $_SESSION["g_house"] = $_POST["g_house"];
+                    $_SESSION["g_bed"] = $_POST["g_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "溫馨親子套房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["h"])) {
+                if ($_POST["h_house"] != "" && $_POST["h_bed"] != "") {
+                    $_SESSION["h"] = $_POST["h"];
+                    $_SESSION["h_house"] = $_POST["h_house"];
+                    $_SESSION["h_bed"] = $_POST["h_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "和洋式套房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["i"])) {
+                if ($_POST["i_house"] != "" && $_POST["i_bed"] != "") {
+                    $_SESSION["i"] = $_POST["i"];
+                    $_SESSION["i_house"] = $_POST["i_house"];
+                    $_SESSION["i_bed"] = $_POST["i_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "主題套房  ";
+                    $go = false;
+                }
+            }
+            if (isset($_POST["j"])) {
+                if ($_POST["j_house"] != "" && $_POST["j_bed"] != "") {
+                    $_SESSION["j"] = $_POST["j"];
+                    $_SESSION["j_house"] = $_POST["j_house"];
+                    $_SESSION["j_bed"] = $_POST["j_bed"];
+                    $go = true;
+                } else {
+                    $errMas .= "樓中樓套房  ";
+                    $go = false;
+                }
+            }
+
+            if ($go) {
+                header('Location: ../php/roomData.php');
+            }
+        }
+        ?>    
         <!-- Header -->
         <header id="header" class="alt">
             <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
@@ -261,9 +267,11 @@
                         <div class="row uniform">
 
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="a" name="a"value="R001" <?php if (isset($_POST["a"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="a" name="a"value="R001" <?php
+                                if (isset($_POST["a"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="a">甜蜜雙人房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -291,9 +299,11 @@
                                 </div>
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="b" name="b" value="R002" <?php if (isset($_POST["b"])) {
-        echo 'checked';
-    } ?> >
+                                <input type="checkbox" id="b" name="b" value="R002" <?php
+                                if (isset($_POST["b"])) {
+                                    echo 'checked';
+                                }
+                                ?> >
                                 <label for="b">豪華雙人房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -322,9 +332,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="c" name="c" value="R004"<?php if (isset($_POST["c"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="c" name="c" value="R004"<?php
+                                if (isset($_POST["c"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="c">四人家庭房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -353,9 +365,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="d" name="d" value="R005" <?php if (isset($_POST["d"])) {
-        echo 'checked';
-    } ?> >
+                                <input type="checkbox" id="d" name="d" value="R005" <?php
+                                if (isset($_POST["d"])) {
+                                    echo 'checked';
+                                }
+                                ?> >
                                 <label for="d">娛樂四人房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -384,9 +398,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="e" name="e" value="R003" <?php if (isset($_POST["e"])) {
-        echo 'checked';
-    } ?> >
+                                <input type="checkbox" id="e" name="e" value="R003" <?php
+                                if (isset($_POST["e"])) {
+                                    echo 'checked';
+                                }
+                                ?> >
                                 <label for="e">海景欣賞房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -415,9 +431,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="f" name="f" value="R006" <?php if (isset($_POST["f"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="f" name="f" value="R006" <?php
+                                if (isset($_POST["f"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="f">經典大套房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -446,9 +464,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="g" name="g" value="R007" <?php if (isset($_POST["g"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="g" name="g" value="R007" <?php
+                                if (isset($_POST["g"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="g">溫馨親子套房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -477,9 +497,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="h" name="h" value="R008" <?php if (isset($_POST["h"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="h" name="h" value="R008" <?php
+                                if (isset($_POST["h"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="h">和洋式套房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -508,9 +530,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="i" name="i" value="R009"<?php if (isset($_POST["i"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="i" name="i" value="R009"<?php
+                                if (isset($_POST["i"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="i">主題套房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -539,9 +563,11 @@
 
                             </div>
                             <div class="6u 12u$(small)">
-                                <input type="checkbox" id="j" name="j" value="R010" <?php if (isset($_POST["j"])) {
-        echo 'checked';
-    } ?>  >
+                                <input type="checkbox" id="j" name="j" value="R010" <?php
+                                if (isset($_POST["j"])) {
+                                    echo 'checked';
+                                }
+                                ?>  >
                                 <label for="j">樓中樓套房</label>
                                 <div class="12u$">
                                     <div class="select-wrapper">
@@ -579,7 +605,13 @@
                     <div class ="Err" style="color:red;">
 <?php
 if ($errMas != "") {
-    echo "<p>請輸入" . $errMas . "的間數/房號!</p>";
+    echo '<script>  swal({
+                text: "請輸入 '. $errMas .'的間數/加床!",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+    echo "<p>請輸入" . $errMas . "的間數/加床!</p>";
 }
 ?>
                     </div>
@@ -613,7 +645,7 @@ if ($errMas != "") {
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     </body>

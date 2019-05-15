@@ -5,9 +5,8 @@
         Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <?php
-   
-    session_start();
-    session_unset();
+session_start();
+session_unset();
 ?>
 <html>
     <head>
@@ -17,86 +16,99 @@
         <link href="assets/css/main.css" rel="stylesheet"/>
         <link href="../images/logo.jpg"  rel="icon">
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Noto+Sans+TC:100,300" rel="stylesheet">
-    </head>
-    <?php
-    $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = "";
-    $name = $id = $bir = $num = $phone = $email = $email = "";
-    $sure = true;
-
-    if (isset($_POST["Reg"])) {
-//        echo "<script>alert('請訂購一間房以上')</script>";
-        $name = $_POST["name"];
-        $id = $_POST["id"];
-        $bir = $_POST["bir"];
-        $phone = $_POST["phone"];
-        $email = $_POST["email"];
-        if (empty($_POST["name"])) {
-
-            $nameErr = "姓名是必填的!";
-            $sure = false;
-        }
-
-        if (empty($_POST["id"])) {
-            $idErr = "身分證是必填的!";
-            $sure = false;
-        } else {
-            $idtest = test_input($_POST["id"]);
-            if (!preg_match("/^[A-Z]{1}[0-9]{9}$/", $idtest)) {
-                $idErr = "身分證不符合格式!";
-                $sure = false;
-            }
-        }
-
-        if (empty($_POST["bir"])) {
-            $birErr = "生日是必填的!";
-            $sure = false;
-        } else {
-//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
-            $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
-
-            if ($age < 20) {
-                $birErr = "低於20歲無法訂房!";
-                $sure = false;
-            }
-        }
-
-        if (empty($_POST["phone"])) {
-            $phoneErr = "手機是必填的!";
-            $sure = false;
-            
-        }else{
-            $phonetest = test_input($_POST["phone"]);
-         if (!preg_match("/^09[0-9]{8}$/", $phonetest)) {
-                $phoneErr = "手機號碼不符合格式!";
-                $sure = false;
-            }
-        }
+        <script src="assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
         
-        if (empty($_POST["email"])) {
-            $emailErr = "E-mail是必填的!";
-            $sure = false;
-        }
-        if ($sure) {
-            $_SESSION["name"] = $_POST["name"];
-            $_SESSION["id"] = $_POST["id"];
-            $_SESSION["bir"] = $_POST["bir"];
-            $_SESSION["phone"] = $_POST["phone"];
-            $_SESSION["email"] = $_POST["email"];
-            $_SESSION["gender"] = $_POST["gender"];
-            
-            header("Location:../room2/room2.php");
-        }
-    }
 
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    ?>
+
+    </head>
+
     <body>
+        <?php
+        $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = "";
+        $name = $id = $bir = $num = $phone = $email = $email = "";
+        $sure = true;
 
+        if (isset($_POST["Reg"])) {
+//        echo "<script>alert('請訂購一間房以上')</script>";
+            $name = $_POST["name"];
+            $id = $_POST["id"];
+            $bir = $_POST["bir"];
+            $phone = $_POST["phone"];
+            $email = $_POST["email"];
+            if (empty($_POST["name"])) {
+
+                $nameErr = "姓名是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["id"])) {
+                $idErr = "身分證是必填的!";
+                $sure = false;
+            } else {
+                $idtest = test_input($_POST["id"]);
+                if (!preg_match("/^[A-Z]{1}[0-9]{9}$/", $idtest)) {
+                    $idErr = "身分證不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["bir"])) {
+                $birErr = "生日是必填的!";
+                $sure = false;
+            } else {
+//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
+                $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
+
+                if ($age < 20) {
+                    $birErr = "低於20歲無法訂房!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["phone"])) {
+                $phoneErr = "手機是必填的!";
+                $sure = false;
+            } else {
+                $phonetest = test_input($_POST["phone"]);
+                if (!preg_match("/^09[0-9]{8}$/", $phonetest)) {
+                    $phoneErr = "手機號碼不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["email"])) {
+                $emailErr = "E-mail是必填的!";
+                $sure = false;
+            }
+            if ($sure) {
+                $_SESSION["name"] = $_POST["name"];
+                $_SESSION["id"] = $_POST["id"];
+                $_SESSION["bir"] = $_POST["bir"];
+                $_SESSION["phone"] = $_POST["phone"];
+                $_SESSION["email"] = $_POST["email"];
+                $_SESSION["gender"] = $_POST["gender"];
+
+                header("Location:../room2/room2.php");
+            } else {
+                $mes = $idErr  .$birErr . $phoneErr;
+                echo '<script>  swal({
+                text: "'.$mes .'",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+            }
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
+        <!--<script> swal("Good job!", "You clicked the button!", "success");</script>-->
         <!-- Header -->
         <header id="header" class="alt">
             <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
@@ -220,6 +232,7 @@
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
+
 
 
 
