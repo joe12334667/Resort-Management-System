@@ -22,6 +22,7 @@ function FindbyId($id) {
 "ORDER BY\n".
 "	a1.\"房型編號\";";
     $result = $db->query($sql);
+    $out = false;
     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 //PDO::FETCH_OBJ 指定取出資料的型態
 //        echo '<tr>';
@@ -38,6 +39,15 @@ function FindbyId($id) {
         <p>     加床數量：'. $row-> 加床 .'    </p>
         <p>     訂單編號：'. $row-> 訂單編號 .'</p>
         <p>     訂單時間：' . $row-> 訂房日期 .'</p>';
+        $out = true;
+    }
+    if(!$out){
+        echo '<script>  swal({
+            text: "查不到資料！  請檢查輸入資料是否正確！",
+            icon: "error",
+            button: false,
+            timer: 3000,
+        }); </script>';
     }
 }
 
@@ -61,6 +71,7 @@ function FindbyName($name) {
 "ORDER BY\n".
 "	a1.\"房型編號\";";
     $result = $db->query($sql);
+    $out = false;
     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 //PDO::FETCH_OBJ 指定取出資料的型態
 //        echo '<tr>';
@@ -77,6 +88,15 @@ function FindbyName($name) {
         <p>     加床數量：'. $row-> 加床 .'    </p>
         <p>     訂單編號：'. $row-> 訂單編號 .'</p>
         <p>     訂單時間：' . $row-> 訂房日期 .'</p>';
+        $out = true;
+    }
+    if(!$out){
+        echo '<script>  swal({
+            text: "查不到資料！  請檢查輸入資料是否正確！",
+            icon: "error",
+            button: false,
+            timer: 3000,
+        }); </script>';
     }
 }
 function house($houseId){

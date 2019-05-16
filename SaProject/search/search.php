@@ -15,6 +15,7 @@
         <link href="assets/css/main.css" rel="stylesheet"/>
         <link href="../images/logo.jpg"  rel="icon">
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Noto+Sans+TC:100,300" rel="stylesheet">
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
     <body>
 
