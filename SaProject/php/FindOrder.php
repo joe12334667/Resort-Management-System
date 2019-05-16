@@ -42,6 +42,8 @@ function FindbyId($id) {
         $out = true;
     }
     if(!$out){
+        echo '<div class ="Err" style="color:red;">
+        查不到資料！  請檢查輸入資料是否正確！</div>';
         echo '<script>  swal({
             text: "查不到資料！  請檢查輸入資料是否正確！",
             icon: "error",
@@ -91,6 +93,8 @@ function FindbyName($name) {
         $out = true;
     }
     if(!$out){
+        echo '<div class ="Err" style="color:red;">
+        查不到資料！  請檢查輸入資料是否正確！</div>';
         echo '<script>  swal({
             text: "查不到資料！  請檢查輸入資料是否正確！",
             icon: "error",
