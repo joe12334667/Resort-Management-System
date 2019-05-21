@@ -18,7 +18,7 @@ session_unset();
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Noto+Sans+TC:100,300" rel="stylesheet">
         <script src="assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/sweetalert.css">
-        
+
 
 
     </head>
@@ -26,7 +26,7 @@ session_unset();
     <body>
         <?php
         $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = $DateErr = "";
-        $name = $id = $bir = $num = $phone = $email = $OrderDate ="";
+        $name = $id = $bir = $num = $phone = $email = $OrderDate = "";
         $sure = true;
 
         if (isset($_POST["Reg"])) {
@@ -35,7 +35,7 @@ session_unset();
             $bir = $_POST["bir"];
             $phone = $_POST["phone"];
             $email = $_POST["email"];
-            $OrderDate=$_POST["OrderDate"];
+            $OrderDate = $_POST["OrderDate"];
             if (empty($_POST["name"])) {
 
                 $nameErr = "姓名是必填的!";
@@ -59,14 +59,14 @@ session_unset();
             } else {
 //            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
 //            $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
-                $err =(strtotime($OrderDate) < strtotime(date('y-m-d')));
+                $err = (strtotime($OrderDate) < strtotime(date('y-m-d')));
                 if ($err) {
                     $DateErr = "訂購日期不能是過去!";
                     $sure = false;
                 }
             }
-            
-             if (empty($_POST["bir"])) {
+
+            if (empty($_POST["bir"])) {
                 $birErr = "生日是必填的!";
                 $sure = false;
             } else {
@@ -78,7 +78,7 @@ session_unset();
                     $sure = false;
                 }
             }
-            
+
             if (empty($_POST["phone"])) {
                 $phoneErr = "手機是必填的!";
                 $sure = false;
@@ -104,9 +104,9 @@ session_unset();
                 $_SESSION["OrderDate"] = $_POST["OrderDate"];
                 header("Location:../room2/room2.php");
             } else {
-                $mes = $idErr  .$birErr . $phoneErr  . $DateErr;
+                $mes = $idErr . $birErr . $phoneErr . $DateErr;
                 echo '<script>  swal({
-                text: "'.$mes .'",
+                text: "' . $mes . '",
                 icon: "error",
                 button: false,
                 timer: 3000,
@@ -135,9 +135,9 @@ session_unset();
                 <li><a href="../room/room.php">訂房服務</a></li>
                 <li><a href="../search/search.php">查詢訂房</a></li>
                 <li><a href="../about/about.html">關於我們</a></li>
-                <li><a href="../information/information.html">聯絡資訊</a></li>
+                <li><a href="../information/information.php">聯絡資訊</a></li>
 
-                <li style="margin-top: 200%"><a href="../user/user.php">使用者介面</a></li>
+                <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
             </ul>
         </nav>
 
@@ -173,7 +173,7 @@ session_unset();
                     <div class="6u$ 12u$(xsmall)"> <p>生日：</p>
                         <input type="date" name="bir" id="bir" value="<?php echo $bir; ?>" placeholder="yyyy-mm-dd" required />
                     </div>
-                    
+
 
                     <p>性別：</p>
                     <div class="4u 12u$(small)">

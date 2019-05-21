@@ -32,9 +32,9 @@ include '../php/FindOrder.php';
                 <li><a href="../room/room.php">訂房服務</a></li>
                 <li><a href="../search/search.php">查詢訂房</a></li>
                 <li><a href="../about/about.html">關於我們</a></li>
-                <li><a href="../information/information.html">聯絡資訊</a></li>
+                <li><a href="../information/information.php">聯絡資訊</a></li>
 
-                <li style="margin-top: 200%"><a href="../user/user.php">使用者介面</a></li>
+                <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
             </ul>
         </nav>
 
