@@ -4,8 +4,8 @@
         templated.co @templatedco
         Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<?php 
-    include '../php/FindOrder.php';
+<?php
+include '../php/FindOrder.php';
 ?>
 <html>
     <head>
@@ -83,19 +83,16 @@
                 </div>
 
             </form>		
-            <?php 
-                if(isset($_POST["next"])){
-                    if($_POST["name"] != ""){
-                        FindbyName($_POST["name"]);
-                    }else if($_POST["id" ] != ""){
-                        FindbyId($_POST["id"]);
-                    }else{
-                        echo '<div class ="Err" style="color:red;">';
-                        echo '請至少輸入一個搜尋選項!</div>';
-                    }
-                    
+            <?php
+            if (isset($_POST["next"])) {
+                if ($_POST["name"] != "" && $_POST["id"] != "") {
+                    FindOrder($_POST["id"],$_POST["name"]);
+                } else {
+                    echo '<div class ="Err" style="color:red;">';
+                    echo '兩個搜尋選項皆需要輸入!</div>';
                 }
-                echo '<hr/>';
+            }
+            echo '<hr/>';
             ?>
 
 
