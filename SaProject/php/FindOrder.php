@@ -127,19 +127,6 @@ function FindOrder($id, $name) {
     $result = $db->query($sql);
     $out = false;
     
-    if (!$out) {
-        echo '<div class ="Err" style="color:red;">
-        查不到資料！  請檢查輸入資料是否正確！</div>';
-        echo '<script>  swal({
-            text: "查不到資料！  請檢查輸入資料是否正確！",
-            icon: "error",
-            button: false,
-            timer: 3000,
-        }); </script>';
-    }
-    
-    
-    
     while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 //PDO::FETCH_OBJ 指定取出資料的型態
 //        echo '<tr>';
@@ -168,6 +155,7 @@ function FindOrder($id, $name) {
             timer: 3000,
         }); </script>';
     }
+    $db = NULL;
 }
 
 function house($houseId) {
