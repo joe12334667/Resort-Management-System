@@ -180,6 +180,13 @@ function FindUser ($acc , $password){
 
 function logInSure(){
     if($_SESSION{"acc" } == ""){
+        echo '<script>  swal({
+            text: "未登入或登入逾時！  兩秒後跳轉至登入畫面!",
+            icon: "error",
+            button: false,
+            timer: 2000,
+        }); </script>';
+        sleep(2);
         header('Location: ../maneger.php');
     }
 

@@ -55,34 +55,34 @@ include '../php/FindOrder.php';
         <div class ="nav">
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
                 <li><a href="#" style="color:#000; ">主頁</a></li>            
-
+                
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/add.php">新增</a></li>                 
-                        <li><a href="../customer/delete.php">刪除</a></li>
-                        <li><a href="../customer/change.php">更新</a></li>   
-                        <li><a href="../customer/search.php">查詢</a></li>                     
+                        <li><a href="customer/add.php">新增</a></li>                 
+                        <li><a href="customer/delete.php">刪除</a></li>
+                        <li><a href="customer/change.php">更新</a></li>   
+                        <li><a href="customer/search.php">查詢</a></li>                     
                     </ul>
                 </li>              
-
+                
                 <li class="sub">         
                     <a href="#" style="color:#000; ">員工</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/add.php">新增</a></li>
-                        <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>   
-                        <li><a href="../employee/search.php">查詢</a></li>                   
+                        <li><a href="employee/add.php">新增</a></li>
+                        <li><a href="employee/delete.php">刪除</a></li>
+                        <li><a href="employee/change.php">更新</a></li>   
+                        <li><a href="employee/search.php">查詢</a></li>                   
                     </ul>
                 </li>     
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">訂單</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/add.php">新增</a></li>
-                        <li><a href="../order/delete.php">刪除</a></li>
-                        <li><a href="../order/change.php">更新</a></li>   
-                        <li><a href="../order/search.php">查詢</a></li>                  
+                        <li><a href="order/add.php">新增</a></li>
+                        <li><a href="order/delete.php">刪除</a></li>
+                        <li><a href="order/change.php">更新</a></li>   
+                        <li><a href="order/search.php">查詢</a></li>                  
                     </ul>
                 </li>   
 

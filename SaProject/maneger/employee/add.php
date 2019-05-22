@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+session_start();
+include '../../php/FindOrder.php';
+
+LogInSure();
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -10,6 +16,7 @@
         <link href="css/main.css" rel="stylesheet">
         <link href="css/menu.css" rel="stylesheet">
         <link href="assets/css/main.css" rel="stylesheet">
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!------------------------->
@@ -47,7 +54,7 @@
         <!--**************************-->
         <div class ="nav">
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
-                <li><a href="#" style="color:#000; ">主頁</a></li>            
+                <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          
@@ -68,7 +75,7 @@
                         <li><a href="../employee/search.php">查詢</a></li>                   
                     </ul>
                 </li>     
-
+                
                 <li class="sub">         
                     <a href="#" style="color:#000; ">訂單</a>          
                     <ul style="z-index: 2">          
@@ -160,6 +167,7 @@
             <script src="assets/js/skel.min.js"></script>
             <script src="assets/js/util.js"></script>
             <script src="assets/js/main.js"></script>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         </div>
 

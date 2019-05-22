@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+session_start();
+include '../../php/FindOrder.php';
+
+
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -16,6 +22,9 @@
     </head>
 
     <body>
+        <?php 
+            LogInSure();
+        ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -47,7 +56,7 @@
         <!--**************************-->
         <div class ="nav">
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
-                <li><a href="#" style="color:#000; ">主頁</a></li>            
+                <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          
