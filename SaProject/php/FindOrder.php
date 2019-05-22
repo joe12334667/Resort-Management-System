@@ -158,6 +158,35 @@ function FindOrder($id, $name) {
     $db = NULL;
 }
 
+function FindUser ($acc , $password){
+    $db = DB();
+    $sql = "SELECT * FROM \"員工\" WHERE \"帳號\"='".$acc."' and \"密碼\"='".$password."'";
+    $result = $db->query($sql);
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+    if($row>1){
+        $_SESSION["acc"] = $acc;
+        $_SESSION["password"] = $password;
+        header('Location: ../maneger/userIndex.php');
+    }else{
+        echo '<script>  swal({
+            text: "查不到資料！  請檢查輸入資料是否正確！",
+            icon: "error",
+            button: false,
+            timer: 3000,
+        }); </script>';
+    }
+
+}
+
+function logInSure(){
+    if($_SESSION{"acc" } == ""){
+        header('Location: ../maneger/maneger.php');
+    }
+
+}
+
+
+
 function house($houseId) {
     switch ($houseId) {
         case "R001":
