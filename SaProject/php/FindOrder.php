@@ -180,7 +180,7 @@ function FindUser ($acc , $password){
 
 function logInSure(){
     if($_SESSION{"acc" } == ""){
-        header('Location: ../maneger/maneger.php');
+        header('Location: ../maneger.php');
     }
 
 }
