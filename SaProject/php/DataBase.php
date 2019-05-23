@@ -11,7 +11,7 @@ try {
     //echo '連線成功';
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //錯誤訊息提醒
     return $db;
-    $db = null; //結束與資料庫連線
+//    $db = null; //結束與資料庫連線
 } catch (PDOException $e) {
     //error message
     echo $e->getMessage();

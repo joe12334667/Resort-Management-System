@@ -60,6 +60,7 @@ if($_SESSION["acc"] == ""){
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          
                     <ul style="z-index: 2; ">          
+                        <li><a href="customer/all.php">客戶總覽</a></li>                 
                         <li><a href="customer/add.php">新增</a></li>                 
                         <li><a href="customer/delete.php">刪除</a></li>
                         <li><a href="customer/change.php">更新</a></li>   
