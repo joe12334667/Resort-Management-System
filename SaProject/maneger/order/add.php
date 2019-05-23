@@ -2,8 +2,7 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
-
-LogInSure();
+@logInSure();
 ?>
 
 <html>
@@ -19,11 +18,13 @@ LogInSure();
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
         <!------------------------->
+        
     </head>
 
     <body>
-        
+    
         <!-- Header -->
         <header id="header" class="alt">
             <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
@@ -167,6 +168,7 @@ LogInSure();
             <script src="assets/js/skel.min.js"></script>
             <script src="assets/js/util.js"></script>
             <script src="assets/js/main.js"></script>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         </div>
 

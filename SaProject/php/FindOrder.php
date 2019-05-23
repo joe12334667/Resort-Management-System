@@ -179,15 +179,17 @@ function FindUser ($acc , $password){
 }
 
 function logInSure(){
-    if($_SESSION{"acc" } == ""){
-        echo '<script>  swal({
-            text: "未登入或登入逾時！  兩秒後跳轉至登入畫面!",
-            icon: "error",
-            button: false,
-            timer: 2000,
-        }); </script>';
-        sleep(2);
+    if($_SESSION["acc"] == ""){
+        // echo '<script>  swal({
+        //     text: "未登入或登入逾時！  兩秒後跳轉至登入畫面!",
+        //     icon: "error",
+        //     button: false,
+        //     timer: 2000,
+        // }); </script>';
+        
         header('Location: ../maneger.php');
+        $_SESSION["unLog"] = true;
+        // echo '<meta http-equiv="refresh" content="2;url=../maneger.php" />';
     }
 
 }

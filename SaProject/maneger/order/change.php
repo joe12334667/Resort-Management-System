@@ -2,8 +2,7 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
-
-LogInSure();
+@logInSure();
 ?>
 <html>
     <head>

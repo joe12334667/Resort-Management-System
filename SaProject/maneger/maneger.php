@@ -25,6 +25,20 @@ include '../php/FindOrder.php';
 
     <body>
         <?php
+        if(isset($_SESSION["unLog"])){
+            if($_SESSION["unLog"]){
+                echo '<script>  swal({
+                text: "未登入或登入逾時！",
+                icon: "error",
+                button: false,
+                timer: 2000,
+                }); </script>';
+                session_unset();
+            }   
+        }
+
+        
+        
         if (isset($_POST["next"])) {
             findUser($_POST["id"], $_POST["password"]);
         }
@@ -61,7 +75,7 @@ include '../php/FindOrder.php';
         <!--**************************-->
         <div class ="nav">
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
-                <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
+                <li><a href="userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          

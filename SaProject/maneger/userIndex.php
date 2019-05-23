@@ -2,9 +2,10 @@
 <?php
 session_start();
 include '../php/FindOrder.php';
-    if($_SESSION{"acc" } == ""){
-        header('Location: maneger.php');
-    }
+if($_SESSION["acc"] == ""){
+    header('Location: maneger.php');
+    $_SESSION["unLog"] = true;
+}
 ?>
 <html>
     <head>
