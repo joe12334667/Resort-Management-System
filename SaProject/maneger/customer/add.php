@@ -2,6 +2,7 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
+include_once '../../php/DataBase.php';
 @logInSure();
 ?>
 <html>
@@ -17,10 +18,116 @@ include '../../php/FindOrder.php';
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
+
+
         <!------------------------->
     </head>
 
     <body>
+        <?php
+        $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = $DateErr = "";
+        $name = $id = $bir = $num = $phone = $email = "";
+        $sure = true;
+
+        if (isset($_POST["Reg"])) {
+            $name = $_POST["name"];
+            $id = $_POST["id"];
+            $bir = $_POST["bir"];
+            $phone = $_POST["phone"];
+            $email = $_POST["email"];
+
+            if (empty($_POST["name"])) {
+
+                $nameErr = "姓名是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["id"])) {
+                $idErr = "身分證是必填的!";
+                $sure = false;
+            } else {
+                $idtest = test_input($_POST["id"]);
+                if (!preg_match("/^[A-Z]{1}[0-9]{9}$/", $idtest)) {
+                    $idErr = "身分證不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["bir"])) {
+                $birErr = "生日是必填的!";
+                $sure = false;
+            } else {
+//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
+                $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
+
+                if ($age < 20) {
+                    $birErr = "低於20歲無法訂房!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["phone"])) {
+                $phoneErr = "手機是必填的!";
+                $sure = false;
+            } else {
+                $phonetest = test_input($_POST["phone"]);
+                if (!preg_match("/^09[0-9]{8}$/", $phonetest)) {
+                    $phoneErr = "手機號碼不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["email"])) {
+                $emailErr = "E-mail是必填的!";
+                $sure = false;
+            }
+            if ($sure) {
+
+                $db = DB();
+                $sql = "INSERT INTO \"顧客資料\" ( \"顧客名稱\", \"生日\", \"身分證字號\", \"連絡電話\","
+                        . " \"電子郵件\", \"性別\" )VALUES( '" . $_POST["name"] . "', '" . $_POST["bir"] . "', '" . $_POST["id"] . "', "
+                        . "'" . $_POST["phone"] . "', '" . $_POST["email"] . "' , '" . $_POST["gender"] . "' );";
+                
+                $db->query($sql);
+//                    echo '<script>   swal({
+//                    title: "新增成功！",
+//                    text: "回到客戶總覽 或是 客戶新增?",
+//                    icon: "success",
+//                      buttons: [
+//                      true, "客戶新增",
+//                      false, "客戶總覽",
+//                        ],
+//                  })
+//                  .then((page) => {
+//                    if (page) {
+//                        document.location.href="add.php";
+//                    } else {
+//                        document.location.href="all.php";
+//                    }
+//                  });
+//                  </script>';
+
+                
+                header("Location:all.php");
+            } else {
+                $mes = $idErr . $birErr . $phoneErr . $DateErr;
+                echo '<script>  swal({
+                text: "' . $mes . '",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+            }
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -107,54 +214,65 @@ include '../../php/FindOrder.php';
                 <h2>新增客戶</h2>
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="" placeholder="Name" required>
+                        <input type="text" name="name" id="name" value="<?php echo $name; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
                     <div class="6u 12u$(small)"> <p>身分證字號：</p>
-                        <input type="text" name="id" id="id" value="" placeholder="ID" required>
+                        <input type="text" name="id" id="id" value="<?php echo $id; ?>" placeholder="ID" required>
                     </div>
 
                     <br/>
                     <div class="6u$ 12u$(small)"> 
                         <p>生日：</p>
-                        <input type="date" name="bir" id="bir" value="" placeholder="yyyy-mm-dd" required>
+                        <input type="date" name="bir" id="bir" value="<?php echo $bir; ?>" placeholder="yyyy-mm-dd" required>
                     </div>
                     <br/>
                     <p>性別：</p>
 
                     <div class="4u 12u$(small)">
-                        <input type="radio" id="priority-low" name="priority" checked>
+                        <input type="radio" id="priority-low" name="gender"  value="男" checked>
                         <label for="priority-low">男</label>
                     </div>
                     <div class="4u$ 12u$(small)">
-                        <input type="radio" id="priority-normal" name="priority">
+                        <input type="radio" id="priority-normal" name="gender" value="女" >
                         <label for="priority-normal">女</label>
                     </div>
 
                     <br/>
                     <div class="6u 12u$(xsmall)" ><p>手機：</p>
-                        <input type="text" name="phone" id="phone" value="" placeholder="Phone" required>
+                        <input type="text" name="phone" id="phone" value="<?php echo $phone; ?>" placeholder="Phone" required>
                     </div>
                     <br/>
                     <div class="6u$ 12u$(xsmall)" ><p>E-mail：</p>
-                        <input type="email" name="email" id="email" value="" placeholder="email" required>
+                        <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="email" required>
                     </div>	
 
 
+                    <div class ="Err" style="color:red;">
+                        <?php
+                        echo "<p>" . $nameErr . "</p>";
+                        echo "<p>" . $idErr . "</p>";
+                        echo "<p>" . $birErr . "</p>";
+                        echo "<p>" . $phoneErr . "</p>";
+                        echo "<p>" . $emailErr . "</p>";
+                        echo "<p>" . $DateErr . "</p>";
+                        ?>
+                    </div>
 
                     <div class="12u$">
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="next" value="ADD"></li>
+                                <li><input type="submit" name="Reg" value="ADD"></li>
 
                             </div>
                         </ul>
                     </div>
+
                 </form>
 
 
