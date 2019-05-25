@@ -20,7 +20,7 @@ include_once '../../php/DataBase.php';
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
 
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!------------------------->
     </head>
 
@@ -88,28 +88,45 @@ include_once '../../php/DataBase.php';
                 $sql = "INSERT INTO \"顧客資料\" ( \"顧客名稱\", \"生日\", \"身分證字號\", \"連絡電話\","
                         . " \"電子郵件\", \"性別\" )VALUES( '" . $_POST["name"] . "', '" . $_POST["bir"] . "', '" . $_POST["id"] . "', "
                         . "'" . $_POST["phone"] . "', '" . $_POST["email"] . "' , '" . $_POST["gender"] . "' );";
-                
-                $db->query($sql);
-//                    echo '<script>   swal({
-//                    title: "新增成功！",
-//                    text: "回到客戶總覽 或是 客戶新增?",
-//                    icon: "success",
-//                      buttons: [
-//                      true, "客戶新增",
-//                      false, "客戶總覽",
-//                        ],
-//                  })
-//                  .then((page) => {
-//                    if (page) {
-//                        document.location.href="add.php";
-//                    } else {
-//                        document.location.href="all.php";
-//                    }
-//                  });
-//                  </script>';
 
-                
-                header("Location:all.php");
+                $db->query($sql);
+//                echo 'swal("新增成功！", "回到客戶總覽 或是 客戶新增?", "success").then(function (result) {
+//                    
+//                    window.location.href = "http://tw.yahoo.com";
+//                }); ';
+
+                    echo '        <script>
+            swal({
+                title: "新增成功！",
+                text: "回到客戶總覽 或是 客戶新增?",
+                icon: "success",
+                buttons: {
+                    1: {
+                        text: "客戶總覽",
+                        value: "客戶總覽",
+                    },
+                    2: {
+                        text: "客戶新增",
+                        value: "客戶新增",
+                    },
+                },
+
+            }).then(function (value) {
+                switch (value) {
+                    case"客戶總覽":
+                        window.location.href = "all.php";
+                        break;
+                    case"客戶新增":
+                        window.location.href = "add.php";
+                        break;
+                        
+
+                }
+            })
+        </script>  ';
+
+
+//                header("Location:all.php");
             } else {
                 $mes = $idErr . $birErr . $phoneErr . $DateErr;
                 echo '<script>  swal({

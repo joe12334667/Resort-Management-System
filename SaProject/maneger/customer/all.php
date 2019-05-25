@@ -6,6 +6,7 @@ include '../../php/FindOrder.php';
 @logInSure();
 ?>
 <html>
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,8 @@ include '../../php/FindOrder.php';
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!------------------------->
+        
+        
     </head>
 
     <body>
@@ -123,32 +126,24 @@ include '../../php/FindOrder.php';
 
 
 
-                <table id="myDataTalbe"  class="display"  >
+                <table id="table-3"   >
                     <thead>
                         <!--必填-->
 
                         <tr>
-                            <th>顧客編號</th>
+                            <th width='80px'>顧客編號</th>
                             <th>顧客名稱</th>
-                            <th>生日</th>
+                            <th width='100px'>生日</th>
                             <th>身分證字號</th>
                             <th>連絡電話</th>
                             <th>電子郵件</th>
                             <th>性別</th>
-                            <th></th>
-                            <th></th>
+                            <th>更新</th>
+                            <th>刪除</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Apple</td>
-                            <td>2000</td>
-                            <td>
-                                <button type="button" onclick='location.href = "change.php?"'>Edit</button>
-                                <button type="button">Delete</button>
-                            </td>
-                        </tr>
+
                         <?php
                         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                             //PDO::FETCH_OBJ 指定取出資料的型態

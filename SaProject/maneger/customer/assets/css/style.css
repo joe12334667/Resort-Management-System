@@ -1,0 +1,30 @@
+
+table thead tr{
+	height:40px;
+	color:#9e7f6b;
+}
+
+table tbody tr{
+    height:40px;
+	border-top-color: #BB85DD;
+}
+
+table tbody tr:nth-child(odd){
+    background: #fff;
+}
+
+table tbody tr:nth-child(even){
+    background: #eeffa5;
+}
+
+.btn-success{
+	background-color:#9e7f6b;
+	border-color:#9e7f6b;
+	font size:10px;
+	font-family: 'Raleway', sans-serif;
+}
+.btn-success:hover{
+	background-color:#e8d2a1;
+	border-color:#e8d2a1;
+	font-family: 'Raleway', sans-serif;
+}
