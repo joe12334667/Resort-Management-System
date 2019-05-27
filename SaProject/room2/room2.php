@@ -4,7 +4,10 @@
         templated.co @templatedco
         Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<?php session_start(); ?>
+<?php 
+
+include '../php/findRoomSpace.php';
+?>
 <html>
     <head>
         <title>ROOM</title>
@@ -18,6 +21,11 @@
 
     <body>
         <?php
+        if(isset($_SESSION["OrderDate"])){
+            findRoomSpace($_SESSION["OrderDate"]);    
+        }else{
+            header("Location:../room/room.php");
+        }
         $go = true;
         $errMas = "";
         if (isset($_POST["send"])) {
@@ -159,6 +167,7 @@
             <ul class="links">
                 <li><a href="../news/news.html">最新消息</a></li>
                 <li><a href="../room/room.php">訂房服務</a></li>
+                <li><a href="../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../search/search.php">查詢訂房</a></li>
                 <li><a href="../about/about.html">關於我們</a></li>
                 <li><a href="../information/information.php">聯絡資訊</a></li>
@@ -186,7 +195,7 @@
 
 
             <!-- Table -->
-            <hr/>
+                        <hr/>
             <h3>特別</h3>
             <div class="table-wrapper">
                 <table>
@@ -194,29 +203,37 @@
                         <tr>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>可訂購房間</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>甜蜜雙人房</td>
                             <td>$2,000</td>
+                            <td><?php echo $_SESSION["R001"]; ?></td>
+
                         </tr>
                         <tr>
                             <td>豪華雙人房</td>
                             <td>$3,000</td>
-                        </tr>
+                            <td><?php echo $_SESSION["R002"]; ?></td>
+                        </tr>  
+                        <tr>
+                            <td>海景欣賞房</td>
+                            <td>$10,000</td>
+                            <td><?php echo $_SESSION["R003"]; ?></td>
+                        </tr> 
                         <tr>
                             <td>四人家庭房</td>
                             <td>$5,000</td>
+                            <td><?php echo $_SESSION["R004"]; ?></td>
                         </tr> 
                         <tr>
                             <td>娛樂四人房</td>
                             <td>$6,000</td>
+                            <td><?php echo $_SESSION["R005"]; ?></td>
                         </tr> 
-                        <tr>
-                            <td>海景欣賞房</td>
-                            <td>$10,000</td>
-                        </tr> 
+
 
                     </tbody>
                 </table>
@@ -229,48 +246,60 @@
                         <tr>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>可訂購房間</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>經典大套房</td>
                             <td>$5,000</td>
-                        </tr>
-                        <tr>
-                            <td>溫馨親子套房</td>
-                            <td>$5,500</td>
+                            <td><?php echo $_SESSION["R006"]; ?></td>
                         </tr>
                         <tr>
                             <td>和洋式套房</td>
                             <td>$6,000</td>
+                            <td><?php echo $_SESSION["R007"]; ?></td>
                         </tr>
+                        <tr>
+                            <td>溫馨親子套房</td>
+                            <td>$5,500</td>
+                            <td><?php echo $_SESSION["R008"]; ?></td>
+                        </tr>
+
                         <tr>
                             <td>主題套房</td>
                             <td>$6,500</td>
+                            <td><?php echo $_SESSION["R009"]; ?></td>
                         </tr>
                         <tr>
                             <td>樓中樓套房</td>
                             <td>$8,000</td>
+                            <td><?php echo $_SESSION["R010"]; ?></td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
+
             <form method="post" action="">
                 <div class="6u$ 12u$(medium)">
 
                     <!-- Buttons -->
-                    <h3>訂購房間</h3> 
+                    <h3>訂購房間</h3><p>如果以下無您欲訂購之房間，有可能已經額滿，請參考以上之表格</p>
+                    
 
                     <form method="post" action="">
 
                         <div class="row uniform">
-
+                            
+                            <?php if($_SESSION["R001"] >= 1){?>
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="a" name="a"value="R001" <?php
                                 if (isset($_POST["a"])) {
                                     echo 'checked';
                                 }
+                                
                                 ?>  >
                                 <label for="a">甜蜜雙人房</label>
                                 <div class="12u$">
@@ -298,6 +327,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php }
+                            
+                            if($_SESSION["R002"] >= 1){
+                            ?>
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="b" name="b" value="R002" <?php
                                 if (isset($_POST["b"])) {
@@ -329,8 +362,13 @@
                                         </select>
                                     </div>
                                 </div>
-
-                            </div>
+                            </div>        
+                            <?php }
+                            
+                            if($_SESSION["R004"] >= 1){
+                            ?>
+                                
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="c" name="c" value="R004"<?php
                                 if (isset($_POST["c"])) {
@@ -362,8 +400,13 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+                             <?php }
+                            
+                            if($_SESSION["R005"] >= 1){
+                            ?>
+                            
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="d" name="d" value="R005" <?php
                                 if (isset($_POST["d"])) {
@@ -397,6 +440,11 @@
                                 </div>
 
                             </div>
+                            
+                            <?php }
+                            
+                            if($_SESSION["R003"] >= 1){
+                            ?>
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="e" name="e" value="R003" <?php
                                 if (isset($_POST["e"])) {
@@ -428,8 +476,13 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+                            
+                             <?php }
+                            
+                            if($_SESSION["R006"] >= 1){
+                            ?>
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="f" name="f" value="R006" <?php
                                 if (isset($_POST["f"])) {
@@ -463,6 +516,11 @@
                                 </div>
 
                             </div>
+                            
+                            <?php }
+                            
+                            if($_SESSION["R007"] >= 1){
+                            ?>
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="g" name="g" value="R007" <?php
                                 if (isset($_POST["g"])) {
@@ -494,8 +552,13 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+                            
+                            <?php }
+                            
+                            if($_SESSION["R008"] >= 1){
+                            ?>
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="h" name="h" value="R008" <?php
                                 if (isset($_POST["h"])) {
@@ -529,6 +592,11 @@
                                 </div>
 
                             </div>
+                            
+                            <?php }
+                            
+                            if($_SESSION["R009"] >= 1){
+                            ?>
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="i" name="i" value="R009"<?php
                                 if (isset($_POST["i"])) {
@@ -560,8 +628,13 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+                            
+                            <?php }
+                            
+                            if($_SESSION["R010"] >= 1){
+                            ?>
+                            
                             <div class="6u 12u$(small)">
                                 <input type="checkbox" id="j" name="j" value="R010" <?php
                                 if (isset($_POST["j"])) {
@@ -593,31 +666,34 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>	
-
+                            <?php }
+                            ?>
+                            
                         </div>
+
+
+                        <div class ="Err" style="color:red;">
+                            <?php
+                            if ($errMas != "") {
+                                echo '<script>  swal({
+                                text: "請輸入 ' . $errMas . '的間數/加床!",
+                                icon: "error",
+                                button: false,
+                                timer: 3000,
+                            }); </script>';
+                                echo "<p>請輸入" . $errMas . "的間數/加床!</p>";
+                            }
+                            ?>
+                        </div>
+                        <ul class="actions">
+                            <li><input type="submit" name="send" value="確認訂購" class="button alt icon fa-check special"></li>
+                        </ul>	
 
                     </form>
 
                     <br/>
 
-                    <div class ="Err" style="color:red;">
-<?php
-if ($errMas != "") {
-    echo '<script>  swal({
-                text: "請輸入 '. $errMas .'的間數/加床!",
-                icon: "error",
-                button: false,
-                timer: 3000,
-            }); </script>';
-    echo "<p>請輸入" . $errMas . "的間數/加床!</p>";
-}
-?>
-                    </div>
-                    <ul class="actions">
-                        <li><input type="submit" name="send" value="確認訂購" class="button alt icon fa-check special"></li>
-                    </ul>	
 
 
 
