@@ -69,7 +69,7 @@ function findRoomSpace($date) {
                     $_SESSION["R001"] -= (int)$row->訂購間數;
                 break;
             case "R002" :
-                    $_SESSION["R002"] -= $row->訂購間數;
+                    $_SESSION["R002"] -= (int)$row->訂購間數;
                 break;
             case "R003" :
                     $_SESSION["R003"] -= (int)$row->訂購間數;
