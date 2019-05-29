@@ -157,7 +157,6 @@ include '../php/findRoomSpace.php';
             <div class="6u$ 12u$(medium)">
 
                 <!-- Buttons -->
-                <h3>訂購房間</h3> 
 
 
 
@@ -166,6 +165,7 @@ include '../php/findRoomSpace.php';
                 
                     <ul class="actions">
                         <li><a href="../room/room.php" class="button special">我想訂房</a></li>
+                        <li><a href="roomSpace.php" class="button special">查詢空房</a></li>
                     </ul>
                 
 

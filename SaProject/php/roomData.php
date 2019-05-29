@@ -19,70 +19,70 @@ $cusNo = $row->顧客編號;
 if(isset($_SESSION["a"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["a"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["a_house"]."' , '".$_SESSION["a_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"] ."' , '".$_SESSION["a_house"]."' , '".$_SESSION["a_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["b"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["b"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["b_house"]."' , '".$_SESSION["b_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["b_house"]."' , '".$_SESSION["b_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["c"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["c"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["c_house"]."' , '".$_SESSION["c_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["c_house"]."' , '".$_SESSION["c_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["d"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["d"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["d_house"]."' , '".$_SESSION["d_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["d_house"]."' , '".$_SESSION["d_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["e"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["e"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["e_house"]."' , '".$_SESSION["e_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["e_house"]."' , '".$_SESSION["e_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["f"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["f"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["f_house"]."' , '".$_SESSION["f_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["f_house"]."' , '".$_SESSION["f_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["g"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["g"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["g_house"]."' , '".$_SESSION["g_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["g_house"]."' , '".$_SESSION["g_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["h"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["h"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["h_house"]."' , '".$_SESSION["h_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["h_house"]."' , '".$_SESSION["h_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["i"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["i"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["i_house"]."' , '".$_SESSION["i_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["i_house"]."' , '".$_SESSION["i_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }
 if(isset($_SESSION["j"])){  
     $sql = "INSERT INTO \"顧客訂房\" (\"顧客編號\" , \"房型編號\" , \"訂房日期\" ,"
             . " \"訂購間數\" , \"加床\") VALUES ('".$cusNo."' , '".$_SESSION["j"]
-            ."' , '". date("Y-m-d")."' , '".$_SESSION["j_house"]."' , '".$_SESSION["j_bed"]."' )";
+            ."' , '". $_SESSION["OrderDate"]."' , '".$_SESSION["j_house"]."' , '".$_SESSION["j_bed"]."' )";
     echo $sql;
     $db->query($sql);
 }

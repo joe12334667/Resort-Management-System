@@ -62,7 +62,7 @@ include '../php/FindOrder.php';
 
                 <h3>您的訂單記錄</h3>
                 <?php
-                FindbyId($_SESSION["id"]);
+                FindOrder($_SESSION["id"] , $_SESSION["name"]);
                 ?>
 
 
