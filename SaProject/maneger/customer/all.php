@@ -113,7 +113,7 @@ include '../../php/FindOrder.php';
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * from 顧客資料";
+                $sql = "SELECT * from 顧客資料 ORDER BY 顧客編號";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
