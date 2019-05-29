@@ -18,10 +18,66 @@ LogInSure();
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!------------------------->
     </head>
 
     <body>
+		<?php 
+            if(isset($_SESSION["dele_sure"])){
+                if($_SESSION["dele_sure"]){
+                echo '<script>  swal({
+                    text: "刪除成功！",
+                    icon: "success",
+                    button: false,
+                    timer: 3000,
+                }); </script>';
+                $_SESSION["dele_sure"] = false;
+                }
+            }
+            $sure = true;
+            if(isset($_POST["Reg"])){
+                if (empty($_POST["id"])) {
+                    $nameErr = "姓名是必填的!";
+                    $sure = false;
+                }
+                if($sure){
+                    $_SESSION["dele_id"] = $_POST["id"];
+                    echo '        <script>
+                    swal({
+                        title: "確定刪除？",
+                        text: "你將無法刪除恢復此資料！",
+                        icon: "warning",
+                        buttons: {
+                            1: {
+                                text: "取消",
+                                value: "取消",
+                            },
+                            2: {
+                                text: "確定刪除！",
+                                value: "確定刪除",
+                            },
+                        },
+        
+                    }).then(function (value) {
+                        switch (value) {
+                            case"取消":
+                                window.location.href = "delete.php";
+                                break;
+                            case"確定刪除":
+                                window.location.href = "php/deleteFile.php";
+                                break;
+                                
+        
+                        }
+                    })
+                </script>  ';
+                }
+            }
+			
+            ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -34,7 +90,6 @@ LogInSure();
             <ul class="links">
                 <li><a href="../../news/news.html">最新消息</a></li>
                 <li><a href="../../room/room.php">訂房服務</a></li>
-                <li><a href="../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../../search/search.php">查詢訂房</a></li>
                 <li><a href="../../about/about.html">關於我們</a></li>
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
@@ -109,10 +164,10 @@ LogInSure();
 
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>客戶訂單：</p>
-                        <input type="text" name="name" id="name" value="" placeholder="Number" required>
+                    <div class="6u 12u$(small)"> <p>訂單編號：</p>
+                        <input type="text" name="id" id="id" value="" placeholder="Number" required>
                     </div>
 
 
@@ -120,7 +175,7 @@ LogInSure();
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="next" value="刪除"></li>
+                                <li><input type="submit" name="Reg" value="刪除"></li>
 
                             </div>
                         </ul>

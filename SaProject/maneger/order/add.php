@@ -24,6 +24,126 @@ include '../../php/FindOrder.php';
     </head>
 
     <body>
+    	<?php
+        $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = $DateErr = "";
+        $name = $id = $bir = $num = $phone = $email = "";
+        $sure = true;
+
+        if (isset($_POST["Reg"])) {
+            $name = $_POST["name"];
+            $id = $_POST["id"];
+            $bir = $_POST["bir"];
+            $phone = $_POST["phone"];
+            $email = $_POST["email"];
+
+            if (empty($_POST["name"])) {
+
+                $nameErr = "姓名是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["id"])) {
+                $idErr = "身分證是必填的!";
+                $sure = false;
+            } else {
+                $idtest = test_input($_POST["id"]);
+                if (!preg_match("/^[A-Z]{1}[0-9]{9}$/", $idtest)) {
+                    $idErr = "身分證不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["bir"])) {
+                $birErr = "生日是必填的!";
+                $sure = false;
+            } else {
+//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
+                $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
+
+                if ($age < 20) {
+                    $birErr = "低於20歲無法訂房!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["phone"])) {
+                $phoneErr = "手機是必填的!";
+                $sure = false;
+            } else {
+                $phonetest = test_input($_POST["phone"]);
+                if (!preg_match("/^09[0-9]{8}$/", $phonetest)) {
+                    $phoneErr = "手機號碼不符合格式!";
+                    $sure = false;
+                }
+            }
+
+            if (empty($_POST["email"])) {
+                $emailErr = "E-mail是必填的!";
+                $sure = false;
+            }
+            if ($sure) {
+
+                $db = DB();
+                $sql = "INSERT INTO \"顧客資料\" ( \"顧客名稱\", \"生日\", \"身分證字號\", \"連絡電話\","
+                        . " \"電子郵件\", \"性別\" )VALUES( '" . $_POST["name"] . "', '" . $_POST["bir"] . "', '" . $_POST["id"] . "', "
+                        . "'" . $_POST["phone"] . "', '" . $_POST["email"] . "' , '" . $_POST["gender"] . "' );";
+
+                $db->query($sql);
+//                echo 'swal("新增成功！", "回到客戶總覽 或是 客戶新增?", "success").then(function (result) {
+//                    
+//                    window.location.href = "http://tw.yahoo.com";
+//                }); ';
+
+                    echo '        <script>
+            swal({
+                title: "新增成功！",
+                text: "回到客戶總覽 或是 客戶新增?",
+                icon: "success",
+                buttons: {
+                    1: {
+                        text: "客戶總覽",
+                        value: "客戶總覽",
+                    },
+                    2: {
+                        text: "客戶新增",
+                        value: "客戶新增",
+                    },
+                },
+
+            }).then(function (value) {
+                switch (value) {
+                    case"客戶總覽":
+                        window.location.href = "all.php";
+                        break;
+                    case"客戶新增":
+                        window.location.href = "add.php";
+                        break;
+                        
+
+                }
+            })
+        </script>  ';
+
+
+//                header("Location:all.php");
+            } else {
+                $mes = $idErr . $birErr . $phoneErr . $DateErr;
+                echo '<script>  swal({
+                text: "' . $mes . '",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+            }
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
     
         <!-- Header -->
         <header id="header" class="alt">
@@ -36,7 +156,6 @@ include '../../php/FindOrder.php';
             <ul class="links">
                 <li><a href="../../news/news.html">最新消息</a></li>
                 <li><a href="../../room/room.php">訂房服務</a></li>
-                <li><a href="../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../../search/search.php">查詢訂房</a></li>
                 <li><a href="../../about/about.html">關於我們</a></li>
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
@@ -110,7 +229,7 @@ include '../../php/FindOrder.php';
                 <h2>新增訂單</h2>
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="../../room2/room2.php">
 
                     <div class="6u 12u$(small)"> <p>姓名：</p>
                         <input type="text" name="name" id="name" value="" placeholder="Name" required>
