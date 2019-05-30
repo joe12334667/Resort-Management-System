@@ -2,10 +2,11 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
-
-LogInSure();
+@include '../../DataBase.php';
+@logInSure();
 ?>
 <html>
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,10 +17,11 @@ LogInSure();
         <link href="css/main.css" rel="stylesheet">
         <link href="css/menu.css" rel="stylesheet">
         <link href="assets/css/main.css" rel="stylesheet">
-        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!------------------------->
+
+
     </head>
 
     <body>
@@ -101,63 +103,63 @@ LogInSure();
 
 
 
+
         <div class="container">          
 
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>新增員工</h2>
+                <h2>員工總覽</h2>
                 <hr/>
-
-                <form method="post" action="../room2/room2.html">
-
-                    <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="" placeholder="Name" required>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>身分證字號：</p>
-                        <input type="text" name="id" id="id" value="" placeholder="ID" required>
-                    </div>
-
-                    <br/>
-                    <div class="6u$ 12u$(small)"> 
-                        <p>生日：</p>
-                        <input type="date" name="bir" id="bir" value="" placeholder="yyyy-mm-dd" required>
-                    </div>
-                    <br/>
-                    <p>性別：</p>
-
-                    <div class="4u 12u$(small)">
-                        <input type="radio" id="priority-low" name="priority" checked>
-                        <label for="priority-low">男</label>
-                    </div>
-                    <div class="4u$ 12u$(small)">
-                        <input type="radio" id="priority-normal" name="priority">
-                        <label for="priority-normal">女</label>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(xsmall)" ><p>手機：</p>
-                        <input type="text" name="phone" id="phone" value="" placeholder="Phone" required>
-                    </div>
-                    <br/>
-                    <div class="6u$ 12u$(xsmall)" ><p>E-mail：</p>
-                        <input type="email" name="email" id="email" value="" placeholder="email" required>
-                    </div>	
+                <?php
+                $db = DB();
+                $sql = "SELECT * FROM \"員工\" ORDER BY \"員工編號\"";
+                $result = $db->query($sql);
+//        echo '<table  border="1">';
+//        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+////PDO::FETCH_OBJ 指定取出資料的型態
+//            echo '<tr>';
+//            echo '<td>' . $row->顧客編號 . "</td><td>" . $row->顧客名稱 . "</td>";
+//            echo '</tr>';
+//        }
+//        echo '</table>';
+                ?>
+                <P> 搜尋員工：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 
 
+                <table id="table-3" class="order-table"   >
+                    <thead>
+                        <!--必填-->
 
-                    <div class="12u$">
-                        <ul class="actions">
-                            <div align="right"  style="margin-right: 5%">
+                        <tr>
+                            <th >員工編號</th>
+                            <th >員工姓名</th>
+                            <th >職稱</th>
+                            <th>帳號</th>
+                            <th>密碼</th>
+                            <th>更新</th>
+                            <th>刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                <li><input type="submit" name="next" value="ADD"></li>
+                        <?php
+                        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                            //PDO::FETCH_OBJ 指定取出資料的型態
+                            echo '<tr>';
+                            echo '<td>' . $row->員工編號 . "</td>"
+                            . "<td>" . $row->員工姓名 . "</td>"
+                            . "<td>" . $row->職稱 . "</td>"
+                            . "<td>" . $row->帳號 . "</td>"
+                            . "<td>" . $row->密碼 . "</td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?" . $row->員工編號 . "\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?" . $row->員工編號 . "\"'>刪除</button></td>";
 
-                            </div>
-                        </ul>
-                    </div>
-                </form>
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
 
 
             </div>       
@@ -168,7 +170,9 @@ LogInSure();
             <script src="assets/js/skel.min.js"></script>
             <script src="assets/js/util.js"></script>
             <script src="assets/js/main.js"></script>
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script language="javascript">
+
+            </script>
 
         </div>
 
@@ -178,6 +182,53 @@ LogInSure();
             &copy; NTUB GROUP 10     
         </div>  
         <!--**************************-->    
+
+        <script>
+            (function (document) {
+                'use strict';
+
+                // 建立 LightTableFilter
+                var LightTableFilter = (function (Arr) {
+
+                    var _input;
+
+                    // 資料輸入事件處理函數
+                    function _onInputEvent(e) {
+                        _input = e.target;
+                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                        Arr.forEach.call(tables, function (table) {
+                            Arr.forEach.call(table.tBodies, function (tbody) {
+                                Arr.forEach.call(tbody.rows, _filter);
+                            });
+                        });
+                    }
+
+                    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+                    function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                    }
+
+                    return {
+                        // 初始化函數
+                        init: function () {
+                            var inputs = document.getElementsByClassName('light-table-filter');
+                            Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                            });
+                        }
+                    };
+                })(Array.prototype);
+
+                // 網頁載入完成後，啟動 LightTableFilter
+                document.addEventListener('readystatechange', function () {
+                    if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                    }
+                });
+
+            })(document);
+        </script>
     </body>
 
 </html>

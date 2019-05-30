@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/SaProject/SaProject/room/roomSpace2.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room2/room2.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room/room.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/customer/php/deleteFile.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/customer/delete.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room/roomSpace.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/php/FindOrder.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room-success/room-success.php</file>
         </group>
     </open-files>
 </project-private>

@@ -21,7 +21,26 @@ include '../../php/FindOrder.php';
     </head>
 
     <body>
-
+            <?php
+            if (isset($_POST["Reg"])) {
+                $db = DB();
+                $sql = "SELECT * FROM \"顧客資料\" where \"顧客編號\" =" . $_POST["id"];
+                $result = $db->query($sql);
+                 while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                     if(isset($row->顧客編號)){
+                         $_SESSION["idNum"] = $row->顧客編號;
+                         $_SESSION["name"] = $row->顧客名稱;
+                         $_SESSION["bir"] = $row->生日;
+                         $_SESSION["cus_id"] = $row->身分證字號;
+                         $_SESSION["phone"] = $row->連絡電話;
+                         $_SESSION["email"] = $row->電子郵件;
+                         $_SESSION["gender"] = $row->性別;
+                         header("Location:change2.php"); 
+                     }
+                 }
+               
+            }
+            ?>
         <!-- Header -->
         <header id="header" class="alt">
             <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
@@ -58,32 +77,32 @@ include '../../php/FindOrder.php';
                 <li class="sub">         
                     <a href="#" style="color:#000; ">客戶</a>          
                     <ul style="z-index: 2; ">          
+                        <li><a href="../customer/all.php">客戶總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
-                        <li><a href="../customer/change.php">更新</a></li>   
-                        <li><a href="../customer/search.php">查詢</a></li>                     
+                        <li><a href="../customer/change.php">更新</a></li>                       
                     </ul>
                 </li>              
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">員工</a>          
                     <ul style="z-index: 2">          
+                        <li><a href="../employee/all.php">員工總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>   
-                        <li><a href="../employee/search.php">查詢</a></li>                   
+                        <li><a href="../employee/change.php">更新</a></li>                   
                     </ul>
                 </li>     
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">訂單</a>          
                     <ul style="z-index: 2">          
+                        <li><a href="../order/all.php">訂單總覽</a></li>
                         <li><a href="../order/add.php">新增</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
-                        <li><a href="../order/change.php">更新</a></li>   
-                        <li><a href="../order/search.php">查詢</a></li>                  
+                        <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
-                </li>   
+                </li> 
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">報表</a>          
@@ -108,10 +127,10 @@ include '../../php/FindOrder.php';
                 <h2>更新客戶</h2>
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>客戶編號：</p>
-                        <input type="text" name="name" id="name" value="" placeholder="Number" required>
+                        <input type="text" name="id" id="id" value="" placeholder="Number" required>
                     </div>
 
 
@@ -119,7 +138,7 @@ include '../../php/FindOrder.php';
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="next" value="查詢"></li>
+                                <li><input type="submit" name="Reg" value="查詢"></li>
 
                             </div>
                         </ul>

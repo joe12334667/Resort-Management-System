@@ -9,7 +9,7 @@ include_once '../../php/DataBase.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>新增客戶</title>
+        <title>更新客戶</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -85,9 +85,16 @@ include_once '../../php/DataBase.php';
             if ($sure) {
 
                 $db = DB();
-                $sql = "INSERT INTO \"顧客資料\" ( \"顧客名稱\", \"生日\", \"身分證字號\", \"連絡電話\","
-                        . " \"電子郵件\", \"性別\" )VALUES( '" . $_POST["name"] . "', '" . $_POST["bir"] . "', '" . $_POST["id"] . "', "
-                        . "'" . $_POST["phone"] . "', '" . $_POST["email"] . "' , '" . $_POST["gender"] . "' );";
+                $sql = "UPDATE \"顧客資料\" \n" .
+                        "SET \"顧客編號\" = ".$_SESSION["idNum"].",\n" .
+                        "\"顧客名稱\" = '".$_POST["name"]."',\n" .
+                        "\"生日\" = '".$_POST["bir"]."',\n" .
+                        "\"身分證字號\" = '".$_POST["id"]."',\n" .
+                        "\"連絡電話\" = '".$_POST["phone"]."',\n" .
+                        "\"電子郵件\" = '".$_POST["email"]."',\n" .
+                        "\"性別\" = '".$_POST["gender"]."' \n" .
+                        "WHERE\n" .
+                        "	\"顧客編號\" =" . $_SESSION["idNum"];
 
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到客戶總覽 或是 客戶新增?", "success").then(function (result) {
@@ -95,10 +102,10 @@ include_once '../../php/DataBase.php';
 //                    window.location.href = "http://tw.yahoo.com";
 //                }); ';
 
-                    echo '        <script>
+                echo '        <script>
             swal({
-                title: "新增成功！",
-                text: "回到客戶總覽 或是 客戶新增?",
+                title: "更改成功！",
+                text: "回到客戶總覽 或是 更新客戶?",
                 icon: "success",
                 buttons: {
                     1: {
@@ -106,8 +113,8 @@ include_once '../../php/DataBase.php';
                         value: "客戶總覽",
                     },
                     2: {
-                        text: "客戶新增",
-                        value: "客戶新增",
+                        text: "更新客戶",
+                        value: "更新客戶",
                     },
                 },
 
@@ -116,8 +123,8 @@ include_once '../../php/DataBase.php';
                     case"客戶總覽":
                         window.location.href = "all.php";
                         break;
-                    case"客戶新增":
-                        window.location.href = "add.php";
+                    case"更新客戶":
+                        window.location.href = "change.php";
                         break;
                         
 
@@ -229,24 +236,28 @@ include_once '../../php/DataBase.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>新增客戶</h2>
+                <h2>更新客戶</h2>
                 <hr/>
-
+                
+                <p>客戶編號:<?php echo $_SESSION["idNum"]; ?></p>
+                <br>
+                <br>
+                
                 <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="<?php echo $name; ?>" placeholder="Name" required>
+                        <input type="text" name="name" id="name" value="<?php echo $_SESSION["name"]; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
                     <div class="6u 12u$(small)"> <p>身分證字號：</p>
-                        <input type="text" name="id" id="id" value="<?php echo $id; ?>" placeholder="ID" required>
+                        <input type="text" name="id" id="id" value="<?php echo $_SESSION["cus_id"]; ?>" placeholder="ID" required>
                     </div>
 
                     <br/>
                     <div class="6u$ 12u$(small)"> 
                         <p>生日：</p>
-                        <input type="date" name="bir" id="bir" value="<?php echo $bir; ?>" placeholder="yyyy-mm-dd" required>
+                        <input type="date" name="bir" id="bir" value="<?php echo $_SESSION["bir"]; ?>" placeholder="yyyy-mm-dd" required>
                     </div>
                     <br/>
                     <p>性別：</p>
@@ -262,11 +273,11 @@ include_once '../../php/DataBase.php';
 
                     <br/>
                     <div class="6u 12u$(xsmall)" ><p>手機：</p>
-                        <input type="text" name="phone" id="phone" value="<?php echo $phone; ?>" placeholder="Phone" required>
+                        <input type="text" name="phone" id="phone" value="<?php echo $_SESSION["phone"]; ?>" placeholder="Phone" required>
                     </div>
                     <br/>
                     <div class="6u$ 12u$(xsmall)" ><p>E-mail：</p>
-                        <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="email" required>
+                        <input type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="email" required>
                     </div>	
 
 
