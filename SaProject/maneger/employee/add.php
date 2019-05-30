@@ -26,7 +26,7 @@ LogInSure();
 
         <!-- Header -->
         <header id="header" class="alt">
-            <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
+            <div class="logo"><a href="../../index/index.html">渡假村 <span>RESORT</span></a></div>
             <a href="#menu">Menu</a>
         </header>
 
@@ -35,7 +35,7 @@ LogInSure();
             <ul class="links">
                 <li><a href="../../news/news.html">最新消息</a></li>
                 <li><a href="../../room/room.php">訂房服務</a></li>
-                <li><a href="../room/roomSpace.php">查詢空房</a></li>
+                <li><a href="../../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../../search/search.php">查詢訂房</a></li>
                 <li><a href="../../about/about.html">關於我們</a></li>
                 <li><a href="../../information/information.php">聯絡資訊</a></li>

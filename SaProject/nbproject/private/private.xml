@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room/roomSpace2.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/customer/php/deleteFile.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/customer/delete.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room/roomSpace.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/php/FindOrder.php</file>
-            <file>file:/C:/xampp/htdocs/SaProject/SaProject/room-success/room-success.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/employee/delete.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/employee/all.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/employee/change.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/order/add.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/order/delete.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/employee/add.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/order/search.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/order/all.php</file>
+            <file>file:/C:/xampp/htdocs/SaProject/SaProject/maneger/order/change.php</file>
         </group>
     </open-files>
 </project-private>
