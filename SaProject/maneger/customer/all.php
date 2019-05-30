@@ -157,8 +157,8 @@ include '../../php/FindOrder.php';
                             . "<td>" . $row->連絡電話 . "</td>"
                             . "<td>" . $row->電子郵件 . "</td>"
                             . "<td>" . $row->性別 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?". $row->顧客編號."\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?". $row->顧客編號."\"'>刪除</button></td>";
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=". $row->顧客編號."\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=". $row->顧客編號."\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }

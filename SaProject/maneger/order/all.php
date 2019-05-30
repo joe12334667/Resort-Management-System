@@ -113,7 +113,7 @@ include '../../php/FindOrder.php';
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * FROM \"顧客訂房\" ORDER BY \"顧客編號\"";
+                $sql = "SELECT * FROM \"顧客訂房\" ORDER BY \"訂單編號\"";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -132,11 +132,12 @@ include '../../php/FindOrder.php';
                         <!--必填-->
 
                         <tr>
+                            <th>訂單編號</th>
                             <th >顧客編號</th>
                             <th >房型編號</th>
                             <th>訂房日期</th>
                             <th>訂購間數</th>
-                            <th>訂單編號</th>
+                            
                             <th>加床</th>
                             <th>更新</th>
                             <th>刪除</th>
@@ -148,14 +149,15 @@ include '../../php/FindOrder.php';
                         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                             //PDO::FETCH_OBJ 指定取出資料的型態
                             echo '<tr>';
-                            echo '<td>' . $row->顧客編號 . "</td>"
+                            
+                            echo '<td>' . $row->訂單編號 . "</td>"
                             . "<td>" . $row->房型編號 . "</td>"
                             . "<td>" . $row->訂房日期 . "</td>"
                             . "<td>" . $row->訂購間數 . "</td>"
-                            . "<td>" . $row->訂單編號 . "</td>"
+                            . "<td>" . $row->顧客編號 . "</td>"
                             . "<td>" . $row->加床 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?" . $row->顧客編號 . "\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?" . $row->顧客編號 . "\"'>刪除</button></td>";
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->訂單編號 . "\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->訂單編號 . "\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }

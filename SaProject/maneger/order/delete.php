@@ -25,9 +25,9 @@ LogInSure();
     </head>
 
     <body>
-		<?php 
-            if(isset($_SESSION["dele_sure"])){
-                if($_SESSION["dele_sure"]){
+        <?php
+        if (isset($_SESSION["dele_sure"])) {
+            if ($_SESSION["dele_sure"]) {
                 echo '<script>  swal({
                     text: "刪除成功！",
                     icon: "success",
@@ -35,17 +35,17 @@ LogInSure();
                     timer: 3000,
                 }); </script>';
                 $_SESSION["dele_sure"] = false;
-                }
             }
-            $sure = true;
-            if(isset($_POST["Reg"])){
-                if (empty($_POST["id"])) {
-                    $nameErr = "姓名是必填的!";
-                    $sure = false;
-                }
-                if($sure){
-                    $_SESSION["dele_id"] = $_POST["id"];
-                    echo '        <script>
+        }
+        $sure = true;
+        if (isset($_POST["Reg"])) {
+            if (empty($_POST["id"])) {
+                $nameErr = "姓名是必填的!";
+                $sure = false;
+            }
+            if ($sure) {
+                $_SESSION["dele_id"] = $_POST["id"];
+                echo '        <script>
                     swal({
                         title: "確定刪除？",
                         text: "你將無法刪除恢復此資料！",
@@ -74,10 +74,9 @@ LogInSure();
                         }
                     })
                 </script>  ';
-                }
             }
-			
-            ?>
+        }
+        ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -167,7 +166,29 @@ LogInSure();
                 <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>訂單編號：</p>
-                        <input type="text" name="id" id="id" value="" placeholder="Number" required>
+                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                        <script>
+                            var url = location.href;
+                            //之後去分割字串把分割後的字串放進陣列中
+                            var ary1 = url.split('?');
+                            //此時ary1裡的內容為：
+                            //ary1[0] = 'index.aspx'，ary2[1] = 'id=U001&name=GQSM'
+
+                            //下一步把後方傳遞的每組資料各自分割
+                            var ary2 = ary1[1].split('&');
+                            //此時ary2裡的內容為：
+                            //ary2[0] = 'id=U001'，ary2[1] = 'name=GQSM'
+
+                            //最後如果我們要找id的資料就直接取ary[0]下手，name的話就是ary[1]
+                            var ary3 = ary2[0].split('=');
+                            //此時ary3裡的內容為：
+                            //ary3[0] = 'id'，ary3[1] = 'U001'
+
+                            //取得id值
+                            var id = ary3[1];
+                            var aee = 10;
+                            document.getElementById("big").value = id;
+                        </script>
                     </div>
 
 

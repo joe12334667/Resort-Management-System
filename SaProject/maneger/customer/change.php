@@ -17,30 +17,37 @@ include '../../php/FindOrder.php';
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!------------------------->
     </head>
 
     <body>
-            <?php
-            if (isset($_POST["Reg"])) {
-                $db = DB();
-                $sql = "SELECT * FROM \"顧客資料\" where \"顧客編號\" =" . $_POST["id"];
-                $result = $db->query($sql);
-                 while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                     if(isset($row->顧客編號)){
-                         $_SESSION["idNum"] = $row->顧客編號;
-                         $_SESSION["name"] = $row->顧客名稱;
-                         $_SESSION["bir"] = $row->生日;
-                         $_SESSION["cus_id"] = $row->身分證字號;
-                         $_SESSION["phone"] = $row->連絡電話;
-                         $_SESSION["email"] = $row->電子郵件;
-                         $_SESSION["gender"] = $row->性別;
-                         header("Location:change2.php"); 
-                     }
-                 }
-               
+        <?php
+        if (isset($_POST["Reg"])) {
+            $db = DB();
+            $sql = "SELECT * FROM \"顧客資料\" where \"顧客編號\" =" . $_POST["id"];
+            $result = $db->query($sql);
+            while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                if (isset($row->顧客編號)) {
+                    $_SESSION["idNum"] = $row->顧客編號;
+                    $_SESSION["name"] = $row->顧客名稱;
+                    $_SESSION["bir"] = $row->生日;
+                    $_SESSION["cus_id"] = $row->身分證字號;
+                    $_SESSION["phone"] = $row->連絡電話;
+                    $_SESSION["email"] = $row->電子郵件;
+                    $_SESSION["gender"] = $row->性別;
+                    header("Location:change2.php");
+                }
             }
-            ?>
+            echo '<script>  swal({
+                title: "無此客戶！",
+                text: "請檢查是否輸入錯誤資料！",
+                icon: "error",
+                button: false,
+                timer: 2000,
+                }); </script>';
+        }
+        ?>
         <!-- Header -->
         <header id="header" class="alt">
             <div class="logo"><a href="../index/index.html">渡假村 <span>RESORT</span></a></div>
@@ -130,7 +137,30 @@ include '../../php/FindOrder.php';
                 <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>客戶編號：</p>
-                        <input type="text" name="id" id="id" value="" placeholder="Number" required>
+
+                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                        <script>
+                            var url = location.href;
+                            //之後去分割字串把分割後的字串放進陣列中
+                            var ary1 = url.split('?');
+                            //此時ary1裡的內容為：
+                            //ary1[0] = 'index.aspx'，ary2[1] = 'id=U001&name=GQSM'
+
+                            //下一步把後方傳遞的每組資料各自分割
+                            var ary2 = ary1[1].split('&');
+                            //此時ary2裡的內容為：
+                            //ary2[0] = 'id=U001'，ary2[1] = 'name=GQSM'
+
+                            //最後如果我們要找id的資料就直接取ary[0]下手，name的話就是ary[1]
+                            var ary3 = ary2[0].split('=');
+                            //此時ary3裡的內容為：
+                            //ary3[0] = 'id'，ary3[1] = 'U001'
+
+                            //取得id值
+                            var id = ary3[1];
+                            var aee = 10;
+                            document.getElementById("big").value = id;
+                        </script>
                     </div>
 
 

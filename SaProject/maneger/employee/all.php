@@ -152,8 +152,8 @@ include '../../php/FindOrder.php';
                             . "<td>" . $row->職稱 . "</td>"
                             . "<td>" . $row->帳號 . "</td>"
                             . "<td>" . $row->密碼 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?" . $row->員工編號 . "\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?" . $row->員工編號 . "\"'>刪除</button></td>";
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->員工編號 . "\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->員工編號 . "\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }
