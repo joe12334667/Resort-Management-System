@@ -67,12 +67,12 @@ include_once '../../php/DataBase.php';
             if ($sure) {
                 $db = DB();
                 $sql = "UPDATE \"顧客訂房\" \n" .
-                        "SET \"訂房編號\" = ".$_SESSION["idNum"].",\n" .
-                        "\"顧客編號\" = '".$_POST["cusid"]."',\n" .
+                        "SET \"訂單編號\" = ".$_SESSION["idNum"].",\n" .
+                        "\"顧客編號\" = ".$_POST["cusid"].",\n" .
                         "\"房型編號\" = '".$_POST["roomid"]."',\n" .
                         "\"訂房日期\" = '".$_POST["resDate"]."',\n" .
-                        "\"訂購間數\" = '".$_POST["num"]."',\n" .
-                        "\"加床\" = '".$_POST["bed"]."',\n" .
+                        "\"訂購間數\" = ".$_POST["num"].",\n" .
+                        "\"加床\" = ".$_POST["bed"]."\n" .
                         "WHERE\n" .
                         "	\"訂單編號\" =" . $_SESSION["idNum"];
                 $db->query($sql);
@@ -109,7 +109,7 @@ include_once '../../php/DataBase.php';
         </script>  ';
 //                header("Location:all.php");
             } else {
-                $mes = $idNumErr . $resDateErr . $numErr . $DateErr;
+                $mes = $idNumErr . $resDateErr . $numErr ;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",
@@ -219,7 +219,7 @@ include_once '../../php/DataBase.php';
                 <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>顧客編號：</p>
-                        <input type="text" name="cusid" id="cusid" value="<?php echo $_SESSION["cusid"]; ?>" placeholder="Name" required>
+                        <input type="number" name="cusid" id="cusid" value="<?php echo $_SESSION["cusid"]; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
@@ -237,7 +237,7 @@ include_once '../../php/DataBase.php';
 
 					<div class="12u$">
                         <div class="select-wrapper">
-                             <input type="num" name="num" id="num" value="<?php echo $_SESSION["num"]; ?>" placeholder="1-4" required>
+                            <input type="number" name="num" id="num" value="<?php echo $_SESSION["num"]; ?>" placeholder="1-4" required>
                         </div>
                     </div>
 
@@ -245,7 +245,7 @@ include_once '../../php/DataBase.php';
                     <p>加床(張數)：</p>
                     <div class="12u$">
                         <div class="select-wrapper">
-                             <input type="num" name="bed" id="bed" value="<?php echo $_SESSION["bed"]; ?>" placeholder="0-2" required>
+                            <input type="number" name="bed" id="bed" value="<?php echo $_SESSION["bed"]; ?>" placeholder="0-2" required>
                         </div>
                     </div>
                     </div>
@@ -255,7 +255,7 @@ include_once '../../php/DataBase.php';
                     <div class ="Err" style="color:red;">
                         <?php
                         echo "<p>" . $cusidErr . "</p>";
-                        echo "<p>" . $roomErr . "</p>";
+                        echo "<p>" . $roomidErr . "</p>";
                         echo "<p>" . $resDateErr . "</p>";
                         echo "<p>" . $numErr . "</p>";
                         echo "<p>" . $bedErr . "</p>";

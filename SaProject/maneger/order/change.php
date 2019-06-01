@@ -133,7 +133,7 @@ include '../../php/FindOrder.php';
                 <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>訂單編號：</p>
-                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                        <input type="number" name="id" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中
