@@ -130,7 +130,7 @@ include '../../php/FindOrder.php';
                 <h2>更新訂單</h2>
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="">
 
                     <div class="6u 12u$(small)"> <p>訂單編號：</p>
                         <input type="text" name="id" id="big" value="" placeholder="Number" required>
