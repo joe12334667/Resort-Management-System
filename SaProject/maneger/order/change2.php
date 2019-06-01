@@ -29,51 +29,42 @@ include_once '../../php/DataBase.php';
         $idNumErr = $cusidErr = $roomidErr = $resDateErr = $numErr = $bedErr = "";
         $idNum = $cusid = $roomid = $num = $resDate = $bed = "";
         $sure = true;
-
         if (isset($_POST["Reg"])) {
             $cusid = $_POST["cusid"];
             $roomid = $_POST["roomid"];
             $resDate = $_POST["resDate"];
             $num = $_POST["num"];
             $bed = $_POST["bed"];
-
             if (empty($_POST["cusid"])) {
-
                 $nameErr = "顧客編號是必填的!";
                 $sure = false;
             }
-
             if (empty($_POST["roomid"])) {
                 $roomidErr = "房型編號是必填的!";
                 $sure = false;
             
             }
-
             if (empty($_POST["resDate"])) {
                 $resDateErr = "訂房日期是必填的!";
                 $sure = false;
             } else {
 //            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
                 $age = round((time() - strtotime($resDate)));
-
                 if ($age > 0) {
                     $resDateErr = "訂房日期不能是過去!";
                     $sure = false;
                 }
             }
-
             if (empty($_POST["num"])) {
                 $numErr = "訂購間數是必填的!";
                 $sure = false;
             
             }
-
             if (empty($_POST["bed"])) {
                 $bedErr = "加床是必填的!";
                 $sure = false;
             }
             if ($sure) {
-
                 $db = DB();
                 $sql = "UPDATE \"顧客訂房\" \n" .
                         "SET \"訂房編號\" = ".$_SESSION["idNum"].",\n" .
@@ -84,13 +75,11 @@ include_once '../../php/DataBase.php';
                         "\"加床\" = '".$_POST["bed"]."',\n" .
                         "WHERE\n" .
                         "	\"訂單編號\" =" . $_SESSION["idNum"];
-
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到訂單總覽 或是 訂單新增?", "success").then(function (result) {
 //                    
 //                    window.location.href = "http://tw.yahoo.com";
 //                }); ';
-
                 echo '        <script>
             swal({
                 title: "更改成功！",
@@ -106,7 +95,6 @@ include_once '../../php/DataBase.php';
                         value: "更新訂單",
                     },
                 },
-
             }).then(function (value) {
                 switch (value) {
                     case"訂單總覽":
@@ -116,12 +104,9 @@ include_once '../../php/DataBase.php';
                         window.location.href = "change.php";
                         break;
                         
-
                 }
             })
         </script>  ';
-
-
 //                header("Location:all.php");
             } else {
                 $mes = $idNumErr . $resDateErr . $numErr . $DateErr;
@@ -133,7 +118,6 @@ include_once '../../php/DataBase.php';
             }); </script>';
             }
         }
-
         function test_input($data) {
             $data = trim($data);
             $data = stripslashes($data);
@@ -240,19 +224,7 @@ include_once '../../php/DataBase.php';
 
                     <br/>
                     <div class="6u 12u$(small)"> <p>房型編號：</p>
-                        <select name="text" id="roomid" value="<?php echo $_SESSION["roomid"]; ?>">
-                             <option value="">- 房型 -</option>
-                             <option value="R001">R001</option>
-                             <option value="R002">R002</option>
-                             <option value="R003">R003</option>
-                             <option value="R004">R004</option>
-                             <option value="R005">R005</option>
-                             <option value="R006">R006</option>
-                             <option value="R007">R007</option>
-                             <option value="R008">R008</option>
-                             <option value="R009">R009</option>
-                             <option value="R010">R010</option>
-                             </select>
+                        <input type="text" name="roomid" id="roomid" value="<?php echo $_SESSION["roomid"]; ?>" placeholder="R001-R010" required>
                     </div>
 
                     <br/>
@@ -265,26 +237,15 @@ include_once '../../php/DataBase.php';
 
 					<div class="12u$">
                         <div class="select-wrapper">
-                             <select name="num" id="num" value="<?php echo $_SESSION["num"]; ?>">
-                             <option value="">- 間數 -</option>
-                             <option value="1">1</option>
-                             <option value="2">2</option>
-                             <option value="3">3</option>
-                             <option value="4">4</option>
-                             </select>
+                             <input type="num" name="num" id="num" value="<?php echo $_SESSION["num"]; ?>" placeholder="1-4" required>
                         </div>
                     </div>
 
                     <br/>
+                    <p>加床(張數)：</p>
                     <div class="12u$">
                         <div class="select-wrapper">
-                             <select name="num" id="num" value="<?php echo $_SESSION["bed"]; ?>">
-                             <option value="">- 加床 -</option>
-                             <option value="0">0</option>
-                             <option value="1">1</option>
-                             <option value="2">2</option>
-                             
-                             </select>
+                             <input type="num" name="bed" id="bed" value="<?php echo $_SESSION["bed"]; ?>" placeholder="0-2" required>
                         </div>
                     </div>
                     </div>
