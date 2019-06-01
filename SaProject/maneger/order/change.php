@@ -8,7 +8,7 @@ include '../../php/FindOrder.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>更新客戶</title>
+        <title>更新訂單</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -21,6 +21,32 @@ include '../../php/FindOrder.php';
     </head>
 
     <body>
+    	<?php
+        if (isset($_POST["Reg"])) {
+            $db = DB();
+            $sql = "SELECT * FROM \"顧客訂房\" where \"訂單編號\" =" . $_POST["id"];
+            $result = $db->query($sql);
+            while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                if (isset($row->訂單編號)) {
+                    $_SESSION["idNum"] = $row->訂單編號;
+                    $_SESSION["cusid"] = $row->顧客編號;
+                    $_SESSION["roomid"] = $row->房型編號;
+                    $_SESSION["resDate"] = $row->訂房日期;
+                    $_SESSION["num"] = $row->訂購間數;
+                    $_SESSION["bed"] = $row->加床;
+
+                    header("Location:change2.php");
+                }
+            }
+            echo '<script>  swal({
+                title: "無此訂單！",
+                text: "請檢查是否輸入錯誤資料！",
+                icon: "error",
+                button: false,
+                timer: 2000,
+                }); </script>';
+        }
+        ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -101,12 +127,12 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>更新客戶</h2>
+                <h2>更新訂單</h2>
                 <hr/>
 
                 <form method="post" action="../room2/room2.html">
 
-                    <div class="6u 12u$(small)"> <p>客戶編號：</p>
+                    <div class="6u 12u$(small)"> <p>訂單編號：</p>
                         <input type="text" name="id" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
@@ -137,7 +163,7 @@ include '../../php/FindOrder.php';
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="next" value="查詢"></li>
+                                <li><input type="submit" name="Reg" value="查詢"></li>
 
                             </div>
                         </ul>
