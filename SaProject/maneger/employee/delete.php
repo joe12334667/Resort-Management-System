@@ -18,6 +18,7 @@ LogInSure();
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
         <!------------------------->
     </head>
 
@@ -39,7 +40,7 @@ LogInSure();
         if (isset($_POST["Reg"])) {
             if (empty($_POST["id"])) {
 
-                $nameErr = "姓名是必填的!";
+                $nameErr = "編號是必填的!";
                 $sure = false;
             }
             if ($sure) {

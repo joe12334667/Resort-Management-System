@@ -63,6 +63,12 @@ include_once '../../php/DataBase.php';
             if (empty($_POST["bed"])) {
                 $bedErr = "加床是必填的!";
                 $sure = false;
+            }else{
+                if($_POST["bed"]>2 || $_POST["bed"] <0){
+                    $bedErr = "加床不可超過限制!";
+                $sure = false;
+                }
+                
             }
             if ($sure) {
                 $db = DB();
@@ -109,7 +115,7 @@ include_once '../../php/DataBase.php';
         </script>  ';
 //                header("Location:all.php");
             } else {
-                $mes = $idNumErr . $resDateErr . $numErr ;
+                $mes = $nameErr . $roomidErr . $resDateErr .$numErr . $bedErr;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",

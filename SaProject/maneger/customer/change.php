@@ -138,7 +138,7 @@ include '../../php/FindOrder.php';
 
                     <div class="6u 12u$(small)"> <p>客戶編號：</p>
 
-                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                        <input type="number" name="id" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中
