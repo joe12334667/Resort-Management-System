@@ -6,7 +6,7 @@
     "FROM\n".
     "	\"員工\"\n".
     "WHERE\n".
-    "	員工 =". $_SESSION["dele_id"];
+    "	員工編號 =". $_SESSION["dele_id"];
 
     $db->query($sql);
     $_SESSION["dele_sure"] = true;

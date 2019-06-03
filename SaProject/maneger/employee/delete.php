@@ -212,6 +212,21 @@ LogInSure();
             <script src="assets/js/skel.min.js"></script>
             <script src="assets/js/util.js"></script>
             <script src="assets/js/main.js"></script>
+            <script>
+                            function getQueryVariable(variable)
+                            {
+                                var query = window.location.search.substring(1);
+                                var vars = query.split("&");
+                                for (var i = 0; i < vars.length; i++) {
+                                    var pair = vars[i].split("=");
+                                    if (pair[0] == variable) {
+                                        return pair[1];
+                                    }
+                                }
+                                return(false);
+                            }
+
+            </script>
 
         </div>
 
