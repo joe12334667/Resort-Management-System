@@ -2,7 +2,7 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
-
+include_once '../../php/DataBase.php';
 LogInSure();
 ?>
 <html>
@@ -23,6 +23,104 @@ LogInSure();
     </head>
 
     <body>
+    	<?php
+        $nameErr = $empidErr = $titleErr = $accErr = $passwordErr = "";
+        $name = $empid = $title = $acc = $password = "";
+        $sure = true;
+
+        if (isset($_POST["Reg"])) {
+            
+            $empid = $_POST["empid"];
+			$name = $_POST["name"];
+            $title = $_POST["title"];
+            $acc = $_POST["acc"];
+            $password = $_POST["password"];
+
+            if (empty($_POST["name"])) {
+
+                $nameErr = "姓名是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["empid"])) {
+                $empidErr = "員工編號是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["acc"])) {
+
+                $accErr = "帳號是必填的!";
+                $sure = false;
+            }
+
+            if (empty($_POST["password"])) {
+
+                $passwordErr = "密碼是必填的!";
+                $sure = false;
+            }
+            if ($sure) {
+
+                $db = DB();
+                $sql = "INSERT INTO \"員工\" ( \"員工編號\", \"員工姓名\", \"職稱\", \"帳號\","
+                        . " \"密碼\" )VALUES( '" . $_POST["empid"] . "', '" . $_POST["name"] . "', '" . $_POST["title"] . "', "
+                        . "'" . $_POST["acc"] . "', '" . $_POST["password"] . "' );";
+
+                $db->query($sql);
+//                echo 'swal("新增成功！", "回到員工總覽 或是 員工新增?", "success").then(function (result) {
+//                    
+//                    window.location.href = "http://tw.yahoo.com";
+//                }); ';
+
+                    echo '        <script>
+            swal({
+                title: "新增成功！",
+                text: "回到員工總覽 或是 員工新增?",
+                icon: "success",
+                buttons: {
+                    1: {
+                        text: "員工總覽",
+                        value: "員工總覽",
+                    },
+                    2: {
+                        text: "員工新增",
+                        value: "員工新增",
+                    },
+                },
+
+            }).then(function (value) {
+                switch (value) {
+                    case"員工總覽":
+                        window.location.href = "all.php";
+                        break;
+                    case"員工新增":
+                        window.location.href = "add.php";
+                        break;
+                        
+
+                }
+            })
+        </script>  ';
+
+
+//                header("Location:all.php");
+            } else {
+                $mes = $empidErr . $nameErr . $accErr . $passwordErr;
+                echo '<script>  swal({
+                text: "' . $mes . '",
+                icon: "error",
+                button: false,
+                timer: 3000,
+            }); </script>';
+            }
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
 
         <!-- Header -->
         <header id="header" class="alt">
@@ -109,42 +207,31 @@ LogInSure();
                 <h2>新增員工</h2>
                 <hr/>
 
-                <form method="post" action="../room2/room2.html">
+                <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="" placeholder="Name" required>
+                    <div class="6u 12u$(small)"> <p>員工編號：</p>
+                        <input type="text" name="empid" id="empid" value="<?php echo $empid; ?>" placeholder="Ex:E123" required>
                     </div>
 
                     <br/>
-                    <div class="6u 12u$(small)"> <p>身分證字號：</p>
-                        <input type="text" name="id" id="id" value="" placeholder="ID" required>
+                    <div class="6u 12u$(small)"> <p>姓名：</p>
+                        <input type="text" name="name" id="name" value="<?php echo $name; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
                     <div class="6u$ 12u$(small)"> 
-                        <p>生日：</p>
-                        <input type="date" name="bir" id="bir" value="" placeholder="yyyy-mm-dd" required>
+                        <p>職稱：</p>
+                        <input type="text" name="title" id="title" value="<?php echo $title; ?>" placeholder="Name" required>
                     </div>
                     <br/>
-                    <p>性別：</p>
-
-                    <div class="4u 12u$(small)">
-                        <input type="radio" id="priority-low" name="priority" checked>
-                        <label for="priority-low">男</label>
-                    </div>
-                    <div class="4u$ 12u$(small)">
-                        <input type="radio" id="priority-normal" name="priority">
-                        <label for="priority-normal">女</label>
+                    <div class="6u 12u$(small)"> <p>帳號：</p>
+                        <input type="text" name="acc" id="acc" value="<?php echo $acc; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
-                    <div class="6u 12u$(xsmall)" ><p>手機：</p>
-                        <input type="text" name="phone" id="phone" value="" placeholder="Phone" required>
+                    <div class="6u 12u$(small)"> <p>密碼：</p>
+                        <input type="text" name="password" id="password" value="<?php echo $password; ?>" placeholder="Name" required>
                     </div>
-                    <br/>
-                    <div class="6u$ 12u$(xsmall)" ><p>E-mail：</p>
-                        <input type="email" name="email" id="email" value="" placeholder="email" required>
-                    </div>	
 
 
 
@@ -152,7 +239,7 @@ LogInSure();
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="next" value="ADD"></li>
+                                <li><input type="submit" name="Reg" value="ADD"></li>
 
                             </div>
                         </ul>
