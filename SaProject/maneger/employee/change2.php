@@ -2,6 +2,7 @@
 <?php
 session_start();
 include '../../php/FindOrder.php';
+include_once '../../php/DataBase.php';
 @logInSure();
 ?>
 <html>
@@ -17,34 +18,113 @@ include '../../php/FindOrder.php';
         <link href="assets/css/main.css" rel="stylesheet">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/js/sweetalert.min.js" type="text/javascript"></script>
+
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!------------------------->
     </head>
 
     <body>
-    	<?php
-         if (isset($_POST["Reg"])) {
-            $db = DB();
-            $sql = "SELECT * FROM \"員工\" where \"員工編號\" =" . $_POST["id"];
-            $result = $db->query($sql);
-            while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                if (isset($row->員工編號)) {
-                    $_SESSION["empnum"] = $row->員工編號;
-                    $_SESSION["name"] = $row->員工姓名;
-                    $_SESSION["title"] = $row->職稱;
-                    $_SESSION["acc"] = $row->訂購間數;
-                    $_SESSION["password"] = $row->加床;
+        <?php
+        $nameErr = $titleErr = $accErr = $passwordErr = "";
+        $name = $title = $acc = $password = "";
+        $sure = true;
 
-                    header("Location:change2.php");
-                }
+        if (isset($_POST["Reg"])) {
+            $name = $_POST["name"];
+            $id = $_POST["title"];
+            $bir = $_POST["acc"];
+            $phone = $_POST["password"];
+
+            if (empty($_POST["name"])) {
+
+                $nameErr = "姓名是必填的!";
+                $sure = false;
             }
-            echo '<script>  swal({
-                title: "無此員工！",
-                text: "請檢查是否輸入錯誤資料！",
+			if (empty($_POST["title"])) {
+
+                $titleErr = "職稱是必填的!";
+                $sure = false;
+            }
+			if (empty($_POST["acc"])) {
+
+                $accErr = "帳號是必填的!";
+                $sure = false;
+            }
+			if (empty($_POST["password"])) {
+
+                $passwordErr = "密碼是必填的!";
+                $sure = false;
+            }
+			
+
+            
+            if ($sure) {
+
+                $db = DB();
+                $sql = "UPDATE \"員工\" \n" .
+                        "SET \"員工編號\" = ".$_SESSION["empnum"].",\n" .
+                        "\"員工姓名\" = '".$_POST["name"]."',\n" .
+                        "\"職稱\" = '".$_POST["title"]."',\n" .
+                        "\"帳號\" = '".$_POST["acc"]."',\n" .
+                        "\"密碼\" = '".$_POST["password"]."' \n" .
+                        "WHERE\n" .
+                        "	\"員工編號\" =" . $_SESSION["empum"];
+
+                $db->query($sql);
+//                echo 'swal("新增成功！", "回到員工總覽 或是 員工新增?", "success").then(function (result) {
+//                    
+//                    window.location.href = "http://tw.yahoo.com";
+//                }); ';
+
+                echo '        <script>
+            swal({
+                title: "更改成功！",
+                text: "回到員工總覽 或是 更新員工?",
+                icon: "success",
+                buttons: {
+                    1: {
+                        text: "員工總覽",
+                        value: "員工總覽",
+                    },
+                    2: {
+                        text: "更新員工",
+                        value: "更新員工",
+                    },
+                },
+
+            }).then(function (value) {
+                switch (value) {
+                    case"員工總覽":
+                        window.location.href = "all.php";
+                        break;
+                    case"更新員工":
+                        window.location.href = "change.php";
+                        break;
+                        
+
+                }
+            })
+        </script>  ';
+
+
+//                header("Location:all.php");
+            } else {
+                $mes = $titleErr . $nameErr . $accErr . $passwordErr;
+                echo '<script>  swal({
+                text: "' . $mes . '",
                 icon: "error",
                 button: false,
-                timer: 2000,
-                }); </script>';
+                timer: 3000,
+            }); </script>';
+            }
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
         }
         ?>
 
@@ -82,9 +162,9 @@ include '../../php/FindOrder.php';
                 <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">客戶</a>          
+                    <a href="#" style="color:#000; ">員工</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">客戶總覽</a></li>
+                        <li><a href="../customer/all.php">員工總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
                         <li><a href="../customer/change.php">更新</a></li>                       
@@ -109,7 +189,7 @@ include '../../php/FindOrder.php';
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
-                </li>  
+                </li>   
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">報表</a>          
@@ -125,6 +205,7 @@ include '../../php/FindOrder.php';
 
 
 
+
         <div class="container">          
 
 
@@ -132,45 +213,53 @@ include '../../php/FindOrder.php';
             <div class="content">
                 <h2>更新員工</h2>
                 <hr/>
-
+                
+                <p>員工編號:<?php echo $_SESSION["idNum"]; ?></p>
+                <br>
+                <br>
+                
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>員工編號：</p>
-                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
-                        <script>
-                            var url = location.href;
-                            //之後去分割字串把分割後的字串放進陣列中
-                            var ary1 = url.split('?');
-                            //此時ary1裡的內容為：
-                            //ary1[0] = 'index.aspx'，ary2[1] = 'id=U001&name=GQSM'
-
-                            //下一步把後方傳遞的每組資料各自分割
-                            var ary2 = ary1[1].split('&');
-                            //此時ary2裡的內容為：
-                            //ary2[0] = 'id=U001'，ary2[1] = 'name=GQSM'
-
-                            //最後如果我們要找id的資料就直接取ary[0]下手，name的話就是ary[1]
-                            var ary3 = ary2[0].split('=');
-                            //此時ary3裡的內容為：
-                            //ary3[0] = 'id'，ary3[1] = 'U001'
-
-                            //取得id值
-                            var id = ary3[1];
-                            var aee = 10;
-                            document.getElementById("big").value = id;
-                        </script>
+                    <div class="6u 12u$(small)"> <p>員工姓名：</p>
+                        <input type="text" name="name" id="name" value="<?php echo $_SESSION["name"]; ?>" placeholder="Name" required>
                     </div>
 
+                    <br/>
+                    <div class="6u 12u$(small)"> <p>職稱：</p>
+                        <input type="text" name="title" id="title" value="<?php echo $_SESSION["title"]; ?>" placeholder="Ex.協理" required>
+                    </div>
+
+                    <br/>
+                    <div class="6u 12u$(small)"> <p>帳號：</p>
+                        <input type="text" name="acc" id="acc" value="<?php echo $_SESSION["acc"]; ?>" placeholder="Ex.協理" required>
+                    </div>                    
+
+                    <br/>
+                    <div class="6u 12u$(small)"> <p>密碼：</p>
+                        <input type="text" name="password" id="password" value="<?php echo $_SESSION["password"]; ?>" placeholder="Ex.協理" required>
+                    </div>
+                    
+
+
+                    <div class ="Err" style="color:red;">
+                        <?php
+                        echo "<p>" . $nameErr . "</p>";
+                        echo "<p>" . $titleErr . "</p>";
+                        echo "<p>" . $accErr . "</p>";
+                        echo "<p>" . $passwordErr . "</p>";
+                        ?>
+                    </div>
 
                     <div class="12u$">
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
 
-                                <li><input type="submit" name="Reg" value="查詢"></li>
+                                <li><input type="submit" name="Reg" value="ADD"></li>
 
                             </div>
                         </ul>
                     </div>
+
                 </form>
 
 
