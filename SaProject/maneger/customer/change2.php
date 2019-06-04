@@ -210,20 +210,12 @@ include_once '../../php/DataBase.php';
                     <a href="#" style="color:#000; ">訂單</a>          
                     <ul style="z-index: 2">          
                         <li><a href="../order/all.php">訂單總覽</a></li>
-                        <li><a href="../order/add.php">新增</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
 
-                <li class="sub">         
-                    <a href="#" style="color:#000; ">報表</a>          
-                    <ul style="z-index: 2">          
-                        <li><a href="/reports/import">進貨報表</a></li>
-                        <li><a href="/reports/export">銷貨報表</a></li>
-                        <li><a href="/reports/inventory">庫存報表</a></li>          
-                    </ul>
-                </li>          
+                          
 
             </ul>
         </div>
