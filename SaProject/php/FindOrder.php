@@ -166,6 +166,8 @@ function FindUser ($acc , $password){
     if($row>1){
         $_SESSION["acc"] = $acc;
         $_SESSION["password"] = $password;
+        
+        
         header('Location: ../maneger/userIndex.php');
     }else{
         echo '<script>  swal({

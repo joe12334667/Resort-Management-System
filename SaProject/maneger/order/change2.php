@@ -149,6 +149,7 @@ include_once '../../php/DataBase.php';
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
 
                 <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
+                <li style="margin-top: 0%"><a href="../php/logOut.php">登出</a></li>
             </ul>
         </nav>
 

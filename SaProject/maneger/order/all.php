@@ -43,6 +43,7 @@ include '../../php/FindOrder.php';
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
 
                 <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
+                <li style="margin-top: 0%"><a href="../php/logOut.php">登出</a></li>
             </ul>
         </nav>
 
@@ -143,10 +144,11 @@ include '../../php/FindOrder.php';
                             echo '<tr>';
                             
                             echo '<td>' . $row->訂單編號 . "</td>"
+                            . "<td>" . $row->顧客編號 . "</td>"
                             . "<td>" . $row->房型編號 . "</td>"
                             . "<td>" . $row->訂房日期 . "</td>"
                             . "<td>" . $row->訂購間數 . "</td>"
-                            . "<td>" . $row->顧客編號 . "</td>"
+                            
                             . "<td>" . $row->加床 . "</td>"
                             . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->訂單編號 . "\"'>更新</button></td>"
                             . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->訂單編號 . "\"'>刪除</button></td>";
