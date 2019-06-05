@@ -63,13 +63,13 @@ include_once '../../php/DataBase.php';
 
                 $db = DB();
                 $sql = "UPDATE \"員工\" \n" .
-                        "SET \"員工編號\" = ".$_SESSION["empnum"].",\n" .
+                        "SET \"員工編號\" ='".$_SESSION["empnum"]."',\n" .
                         "\"員工姓名\" = '".$_POST["name"]."',\n" .
                         "\"職稱\" = '".$_POST["title"]."',\n" .
                         "\"帳號\" = '".$_POST["acc"]."',\n" .
                         "\"密碼\" = '".$_POST["password"]."' \n" .
                         "WHERE\n" .
-                        "	\"員工編號\" =" . $_SESSION["empum"];
+                        "	\"員工編號\" ='" . $_SESSION["empnum"]."'";
 
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到員工總覽 或是 員工新增?", "success").then(function (result) {
@@ -192,14 +192,7 @@ include_once '../../php/DataBase.php';
                     </ul>
                 </li>   
 
-                <li class="sub">         
-                    <a href="#" style="color:#000; ">報表</a>          
-                    <ul style="z-index: 2">          
-                        <li><a href="/reports/import">進貨報表</a></li>
-                        <li><a href="/reports/export">銷貨報表</a></li>
-                        <li><a href="/reports/inventory">庫存報表</a></li>          
-                    </ul>
-                </li>          
+               
 
             </ul>
         </div>
@@ -215,7 +208,7 @@ include_once '../../php/DataBase.php';
                 <h2>更新員工</h2>
                 <hr/>
                 
-                <p>員工編號:<?php echo $_SESSION["idNum"]; ?></p>
+                <p>員工編號:<?php echo $_SESSION["empnum"]; ?></p>
                 <br>
                 <br>
                 
@@ -232,12 +225,12 @@ include_once '../../php/DataBase.php';
 
                     <br/>
                     <div class="6u 12u$(small)"> <p>帳號：</p>
-                        <input type="text" name="acc" id="acc" value="<?php echo $_SESSION["acc"]; ?>" placeholder="Ex.協理" required>
+                        <input type="text" name="acc" id="acc" value="<?php echo $_SESSION["emp_acc"]; ?>" placeholder="Ex.協理" required>
                     </div>                    
 
                     <br/>
                     <div class="6u 12u$(small)"> <p>密碼：</p>
-                        <input type="text" name="password" id="password" value="<?php echo $_SESSION["password"]; ?>" placeholder="Ex.協理" required>
+                        <input type="text" name="password" id="password" value="<?php echo $_SESSION["emp_pas"]; ?>" placeholder="Ex.協理" required>
                     </div>
                     
 

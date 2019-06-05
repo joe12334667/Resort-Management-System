@@ -25,15 +25,15 @@ include '../../php/FindOrder.php';
     	<?php
          if (isset($_POST["Reg"])) {
             $db = DB();
-            $sql = "SELECT * FROM \"員工\" where \"員工編號\" =" . $_POST["id"];
+            $sql = "SELECT * FROM \"員工\" where \"員工編號\" ='" . $_POST["id"]."'";
             $result = $db->query($sql);
             while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                 if (isset($row->員工編號)) {
                     $_SESSION["empnum"] = $row->員工編號;
                     $_SESSION["name"] = $row->員工姓名;
                     $_SESSION["title"] = $row->職稱;
-                    $_SESSION["acc"] = $row->訂購間數;
-                    $_SESSION["password"] = $row->加床;
+                    $_SESSION["emp_acc"] = $row->帳號;
+                    $_SESSION["emp_pas"] = $row->密碼;
 
                     header("Location:change2.php");
                 }
@@ -112,15 +112,7 @@ include '../../php/FindOrder.php';
                     </ul>
                 </li>  
 
-                <li class="sub">         
-                    <a href="#" style="color:#000; ">報表</a>          
-                    <ul style="z-index: 2">          
-                        <li><a href="/reports/import">進貨報表</a></li>
-                        <li><a href="/reports/export">銷貨報表</a></li>
-                        <li><a href="/reports/inventory">庫存報表</a></li>          
-                    </ul>
-                </li>          
-
+               
             </ul>
         </div>
 
