@@ -15,6 +15,24 @@
 	</head>
     
 	<body>
+    			<?php 
+					if(isset($_POST["send"])){
+						$nickname=$_POST["nickname"];
+						$email=$_POST["email"];//寄件者email
+						$sub=$_POST["subject"];//主旨
+						$content=$_POST["content"];//信件內文
+										
+						mb_internal_encoding("utf-8");
+						$to="emily.sep24@gmail.com";//收件者
+						$subject=mb_encode_mimeheader("$sub","utf-8");
+						$message="$content";
+						$headers="MIME-Version: 1.0\r\n";
+						$headers.="Content-type: text/html; charset=utf-8\r\n";
+						$headers.="From:".mb_encode_mimeheader("$nickname","utf-8")."<$email>\r\n";
+						mail($to,$subject,$message,$headers);
+					}
+				?>				
+    	
 
 		<!-- Header -->
 			<header id="header" class="alt">
@@ -62,34 +80,18 @@
 							
 							<!-- Form -->
 								<h6>留言</h6>
-                                <?php 
-									if(isset($_POST["send"])){
-										$nickname=$_POST['nickname'];
-										$email=$_POST['email'];//寄件者email
-										$sub=$_POST['subject'];//主旨
-										$content=$_POST['content'];//信件內文
-										
-										mb_internal_encoding("utf-8");
-										$to="emily.sep24@gmail.com";//收件者
-										$subject=mb_encode_mimeheader("$sub","utf-8");
-										$message="$content";
-										$headers="MIME-Version: 1.0\r\n";
-										$headers.="Content-type: text/html; charset=utf-8\r\n";
-										$headers.="From:".mb_encode_mimeheader("$nickname","utf-8")."<$email>\r\n";
-										mail($to,$subject,$message,$headers);
-									}
-								?>
+                                
 
 								<form method="post" action="">
 									<div class="row uniform">
 										<div class="6u 12u$(xsmall)">
-											<input type="text" name="nickname" id="nickname" value="" placeholder="Nickname" />
+											<input type="text" name="nickname" id="nickname" value="<?php echo $nickname; ?>" placeholder="Nickname" />
 										</div>
 										<div class="6u$ 12u$(xsmall)">
-											<input type="email" name="email" id="email" value="" placeholder="Email" />
+											<input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="Email" />
 										</div>
                                         <div class="6u$ 12u$(small)">
-											<input type="text" name="subject" id="subject" value="" placeholder="Subject" />
+											<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" placeholder="Subject" />
 										</div>
 										<!-- Break -->
 										<!--<div class="6u 12u$(small)">
@@ -102,7 +104,7 @@
 										</div>-->
 										<!-- Break -->
 										<div class="12u$">
-											<textarea name="content" id="content" placeholder="想給我們的意見..." rows="6"></textarea>
+											<textarea name="content" id="content" value="<?php echo $content; ?>" placeholder="想給我們的意見..." rows="6"></textarea>
 										</div>
 										<!-- Break -->
 										<div align="right">
